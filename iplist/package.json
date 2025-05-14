@@ -51,6 +51,11 @@
     "productName": "iplist",
     "appId": "com.iplist.electron",
     "asar": true,
+    "files": [
+      "build/**/*",
+      "build/favicon.png",
+      "electron.js"
+    ],
     "mac": {
       "target": [
         "default"
