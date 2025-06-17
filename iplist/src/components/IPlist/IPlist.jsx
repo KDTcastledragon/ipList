@@ -9,7 +9,7 @@ function IPlist() {
             <h1>IP 목록 관리</h1>
             <div>
                 <span>관리번호 : </span>
-                <span>h2134k</span>
+                <span>1220A237</span>
             </div>
             <div>
                 <span>분류</span>
@@ -21,7 +21,7 @@ function IPlist() {
                     <option value="PDA">PDA</option>
                 </select>
             </div>
-            <div>사번 : <span>8468464535</span></div>
+            <div>사번 : <span>12345678</span></div>
             <div>이름 : <span>이성룡</span></div>
             <div>직급 : <span>인턴</span></div>
             <div>소속 : <span>IT팀</span></div>
