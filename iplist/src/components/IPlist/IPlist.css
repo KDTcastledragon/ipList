@@ -1,0 +1,11 @@
+.OATable {
+    background-color: green;
+}
+
+.OATable>thead {
+    background-color: aqua;
+}
+
+.OATable>tbody {
+    background-color: brown;
+}

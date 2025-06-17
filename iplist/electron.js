@@ -3,10 +3,6 @@ const { dialog } = require('electron');
 // const isDev = require('electron-is-dev');
 
 function createWindow() {
-  console.log(`제대로 작동중인가요???`);
-    console.log(`제대로 작동중인가요???`);
-    console.log(`제대로 작동중인가요???`);
-
   const win = new BrowserWindow({
     width: 1024,
     height: 768,
