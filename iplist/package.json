@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:win64": "electron-builder --windows nsis:ia64",
+    "deploy:win64": "electron-builder --windows nsis:x64",
     "start:electron": "concurrently 'npm run start:dev' 'wait-on http://localhost:3000 && electron .'"
   },
   "eslintConfig": {
@@ -48,13 +48,14 @@
     "wait-on": "^8.0.3"
   },
   "build": {
+    "extends": null,
     "productName": "iplist",
     "appId": "com.iplist.electron",
     "asar": true,
     "files": [
+      "electron.js",
       "build/**/*",
-      "build/favicon.png",
-      "electron.js"
+      "build/favicon.png"
     ],
     "mac": {
       "target": [
@@ -69,8 +70,7 @@
     "win": {
       "target": [
         "nsis"
-      ],
-      "icon": "build/icons/icon.ico"
+      ]
     },
     "nsis": {
       "oneClick": false,
