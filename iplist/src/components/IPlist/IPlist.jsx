@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 
 function IPlist() {
-    const [enteredWord,setEnteredWord] = useState('');
+    const [enteredWord, setEnteredWord] = useState('');
 
     function searchDB(word) {
         alert(`${word}`);
@@ -12,15 +12,15 @@ function IPlist() {
     return (
         <div className='Container'>
             <div className='menu'>
-                <div><span>자산관리</span></div>
+                <div><span>자산</span></div>
                 <div><span>IP목록</span></div>
                 <div><span>USB</span></div>
-                <div><span>조직도</span></div>
                 <div><span>로그</span></div>
+                <div><span>조직도</span></div>
             </div>
             <div>
-                <input type="text" onChange={(e)=>setEnteredWord(e.target.value)} value={enteredWord}/>
-                <button onClick={()=>searchDB(enteredWord)}>검색</button>
+                <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
+                <button onClick={() => searchDB(enteredWord)}>검색</button>
                 {/* 관리번호, 사번,사용자,품목, 소속,부서,위치,구분,등급,비용,비고,사용현황,모델,시리얼,ip,관리자노트 */}
             </div>
             <table className='oaTable'>
@@ -48,23 +48,23 @@ function IPlist() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>관리번호</td>
-                        <td>사용자</td>
-                        <td>품목</td>
-                        <td>등급</td>
-                        <td>소속</td>
-                        <td>부서</td>
-                        <td>위치</td>
-                        <td>구매일</td>
-                        <td>만료일</td>
-                        <td>교체일</td>
-                        <td>비용</td>
-                        <td>사원번호</td>
-                        <td>구분</td>
-                        <td>사용현황</td>
-                        <td>모델</td>
-                        <td>시리얼</td>
-                        <td>IP주소</td>
+                        <td>12203134</td>
+                        <td>이성룡</td>
+                        <td>데스크탑</td>
+                        <td>상급</td>
+                        <td>서울</td>
+                        <td>IT팀</td>
+                        <td>서울 9F</td>
+                        <td>2025-03-31</td>
+                        <td>2025-10-04</td>
+                        <td>2025-03-31</td>
+                        <td>31000</td>
+                        <td>22510231</td>
+                        <td>lotte</td>
+                        <td>개인</td>
+                        <td>thin 15B V13E</td>
+                        <td>L38103A23432</td>
+                        <td>192.168.110.93</td>
                         <td>비고</td>
                     </tr>
                 </tbody>
