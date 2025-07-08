@@ -1,10 +1,10 @@
 import './App.css';
-import IPlist from './components/IPlist/IPlist';
+import Assets from './components/Assets/Assets';
 
 function App() {
   return (
     <div className="App">
-      <IPlist></IPlist>
+      <Assets></Assets>
     </div>
   );
 }
