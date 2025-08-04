@@ -1,14 +1,14 @@
-import './Log.css';
+import './USB.css';
 import { useEffect, useState } from 'react';
 
 
-function Log() {
+function USB() {
 
     return (
         <>
-            <h1>LOg</h1>
+            <h1>USB</h1>
         </>
     );
 }
 
-export default Log;
+export default USB;
