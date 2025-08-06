@@ -11,14 +11,7 @@ function Assets() {
 
     return (
         <div className='Container'>
-            <div className='menu'>
-                <div><span>자산</span></div>
-                <div><span>IP</span></div>
-                <div><span>USB</span></div>
-                <div><span>로그</span></div>
-                <div><span>조직도</span></div>
-                <div><span>추가</span></div>
-            </div>
+
             <div>
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
                 <button onClick={() => searchDB(enteredWord)}>검색</button>

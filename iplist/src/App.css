@@ -1,5 +1,8 @@
 .App {
+  border: 3px solid red;
   text-align: center;
+  width: 1100px;
+  height: 660px;
 }
 
 .App-logo {
@@ -32,6 +35,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

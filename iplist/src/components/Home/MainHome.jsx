@@ -1,11 +1,18 @@
 import './MainHome.css';
+
+import Header from './Header';
 import RouteBody from './RouteBody';
 
 function MainHome() {
     return (
-        <div>
-            <RouteBody />
-        </div>
+        <>
+            <div>
+                <Header />
+            </div>
+            <div>
+                <RouteBody />
+            </div>
+        </>
     )
 }
 
