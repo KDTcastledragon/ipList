@@ -28,16 +28,17 @@ function Assets() {
                         <th>소속</th>
                         <th>부서</th>
                         <th>위치</th>
-                        <th>IP주소</th>
                         <th>구매일</th>
                         <th>만료일</th>
                         <th>구분</th>
                         <th>비용</th>
-                        <th>사용현황</th>
+                        <th>IP주소</th>
+                        <th>사용</th>
                         <th>모델</th>
                         <th>시리얼</th>
-                        <th>교체일</th>
+                        <th>교체</th>
                         <th>비고</th>
+                        <th>변경</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,16 +51,17 @@ function Assets() {
                         <td>서울</td>
                         <td>IT팀</td>
                         <td>서울 9F</td>
-                        <td>192.168.110.93</td>
                         <td>2025-03-31</td>
                         <td>2025-10-04</td>
                         <td>lotte</td>
                         <td>31000</td>
+                        <td>192.168.110.93</td>
                         <td>개인</td>
                         <td>thin 15B V13E</td>
                         <td>L38103A23432</td>
                         <td>2025-03-31</td>
                         <td>비고</td>
+                        <td><button>변경</button></td>
                     </tr>
                 </tbody>
             </table>
