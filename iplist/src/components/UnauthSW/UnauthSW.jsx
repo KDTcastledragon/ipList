@@ -49,7 +49,7 @@ function UnauthSW() {
     return (
         <div className='UnauthSWContainer'>
             <h1>미인가 프로그램</h1>
-            <div>
+            {/* <div>
                 <input type="file" accept=".xlsx, .xls" onChange={handleExcelFile} />
                 <div className='unauthdatagrid'>
                     <table>
@@ -64,13 +64,13 @@ function UnauthSW() {
                             </tr>
                         </tbody>
                     </table>
-                    {/* <DataGrid
-                        columns={columns}
-                        rows={rows}
-                        onRowsChange={onRowsChange}
-                    /> */}
                 </div>
-            </div>
+            </div> */}
+
+            <form action="https://seongryonglee.app.n8n.cloud/webhook-test/16d8bbdd-276c-4d8a-91ca-08e3a95ad677" method="POST" enctype="multipart/form-data">
+                <input type="file" name="data" />
+                <button type="submit">파일 업로드</button>
+            </form>
         </div>
     );
 }
