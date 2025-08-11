@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <style>
+        body {
+            font-size: 13px;
+        }
+
+        .title>* {
+            text-indent: 20px;
+        }
+
+        .title>span:nth-child(1) {
+            font-weight: bold;
+        }
+
+        .title {
+            margin-bottom: 33px;
+        }
+
+        .title>.contentTable>table {
+            margin-top: 7px;
+            margin-left: 15px;
+        }
+
+        .title>.contentTable>table,
+        .title>.contentTable>table>*>*>* {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .title>.contentTable>table>thead {
+            font-weight: bold;
+            background-color: rgb(255, 199, 95);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <span>1. 점검내용 : </span>
+        <span class="sub-title">PC에 설치 된 유료 라이선스 또는 프로그램(기업용) 상시 모니터링 중 입니다. </span>
+    </div>
+
+    <div class="title">
+        <span>2. 점검결과 : </span>
+        <span>구매 이력이 없거나 미 등록된 유료 라이선스 및 프로그램(또는 폰트) 내역 </span>
+        <div class="contentTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>부서</th>
+                        <th>사용자</th>
+                        <th>구분</th>
+                        <th>소프트웨어명/폰트명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $json['부서명'] }}</td>
+                        <td>{{ $json['사용자명'] }}</td>
+                        <td></td>
+                        <td>{{ $json['SW명'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <div class="title">
+        <span>3. 조치 방법 : </span>
+        <div><span> ① 프로그램 제거 및 삭제 : 첨부해드린 메뉴얼을 참고하시어 프로그램(또는 폰트) 삭제를 진행해주십시오.</span></div>
+        <div><span>※ 삭제/제거 후 조치 내역 회신 공유 필수</span></div>
+        <div><span>② 라이선스 구매 및 갱신 : 업무에 필수적으로 사용해야 하는 경우, 해당 부서에서 결재 품의진행 후에
+                해당 내역을 공유해 주시면 라이선스 인증 업데이트를 진행하겠습니다.</span></div>
+    </div>
+
+    <div class="title">
+        <span>4. 이슈 사항 : </span>
+        <span>미 구매에 대한 기업용 라이선스를 사용에 따른 저작권 위반 공문 등 리스크 발생이 초래됩니다.</span>
+        <div><span> ※ 최근 저작권 관련 글꼴(폰트) 적발 사례 공유 및 지침 사항 전사 공유</span></div>
+        <div><span>https://www.youtube.com/watch?v=4UaLEDCY1IY</span></div>
+    </div>
+
+    <div class="closingRemark"><span>기타 문의사항, 궁금한 사항이 있으실 경우 메일 문의 주시면 자세히 말씀드리겠습니다.</span></div>
+    <div class="closingRemark"><span>감사합니다.</span></div>
+
+</body>
+
+</html>
