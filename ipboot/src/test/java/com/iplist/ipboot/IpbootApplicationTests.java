@@ -1,10 +1,10 @@
-package com.ip.list.iplistboot;
+package com.iplist.ipboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IplistbootApplicationTests {
+class IpbootApplicationTests {
 
 	@Test
 	void contextLoads() {
