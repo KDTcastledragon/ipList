@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iplist.ipboot.mapper.AssetMapper">
+	<select id="allAssets" resultType="com.iplist.ipboot.domain.AssetDTO">
+        SELECT * FROM asset;
+    </select>
+    
+    <select id="searchWord" resultType="com.iplist.ipboot.domain.AssetDTO">
+        SELECT * FROM asset where asset_id like concat('%',#{word},'%')
+        	OR asset_type LIKE CONCAT('%', #{searchWord}, '%')
+        	OR emp_id LIKE CONCAT('%', #{searchWord}, '%')
+        	OR emp_name LIKE CONCAT('%', #{searchWord}, '%')
+        	OR org_name LIKE CONCAT('%', #{searchWord}, '%')
+        	OR dept_name LIKE CONCAT('%', #{searchWord}, '%')
+        	OR location LIKE CONCAT('%', #{searchWord}, '%')
+        	OR owns_type LIKE CONCAT('%', #{searchWord}, '%')
+        	OR model LIKE CONCAT('%', #{searchWord}, '%')
+        	OR serial_num LIKE CONCAT('%', #{searchWord}, '%')
+        	
+    </select>
+   
+
+</mapper>

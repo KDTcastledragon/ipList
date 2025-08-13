@@ -1,23 +1,75 @@
 import './Assets.css';
+import axios from 'axios';
+
+import ModifyModal from './ModifyModal';
+import AddModal from './AddModal';
 import { useEffect, useState } from 'react';
 
 
 function Assets() {
     const [enteredWord, setEnteredWord] = useState('');
+    const [assetsData, setAssetsData] = useState([]);
+    const [selectedAssetsData, setSelectedAssetsData] = useState(null);
+    const [modifyWindow, setModifyWindow] = useState(false);
+    const [addModalWindow, setAddModalWindow] = useState(false);
 
-    function searchDB(word) {
-        alert(`${word}`);
+    //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
+    function handleEscKey(e) {
+        if (e.key === 'Escape') {
+            setModifyWindow(false);
+        }
+    };
+
+
+    //==[2. 모달창 오픈시에 자동으로 Esc 키 이벤트를 감지하도록 설정]=============================================================
+    useEffect(() => {
+        window.addEventListener('keydown', handleEscKey);
+
+        return () => {
+            window.removeEventListener('keydown', handleEscKey);
+        };
+
+    }, []);
+
+
+    function allAssets() {
+        axios
+            .get(`/asset/allAssets`)
+            .then((r) => {
+                alert(`올 에셋 성공`);
+                setAssetsData(r.data);
+            }).catch((e) => {
+                alert(`${e.message}`);
+            })
+    }
+
+    function modifyAssets(data) {
+        setModifyWindow(true);
+        setSelectedAssetsData(data);
+    }
+
+    function searchWord() {
+        axios
+            .get(`/asset/searchWord=${enteredWord}`)
+            .then((r) => {
+                setAssetsData(r.data);
+            }).catch((e) => {
+                alert(`실패.`);
+            })
     }
 
     return (
-        <div className='Container'>
+        <div className='AssetContainer'>
 
             <div>
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
-                <button onClick={() => searchDB(enteredWord)}>검색</button>
-                {/* 관리번호, 사번,사용자,품목, 소속,부서,위치,구분,등급,비용,비고,사용현황,모델,시리얼,ip,관리자노트 */}
+                <button onClick={() => searchWord(enteredWord)}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => allAssets()}>모든 자산</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => setAddModalWindow(true)}>자산추가</button>
             </div>
-            <table className='oaTable'>
+            <table className='assetTable'>
                 <thead>
                     <tr>
                         <th>관리번호</th>
@@ -42,30 +94,56 @@ function Assets() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>72203134</td>
-                        <td>노트북</td>
-                        <td>상급</td>
-                        <td>이성룡</td>
-                        <td>22510231</td>
-                        <td>서울</td>
-                        <td>IT팀</td>
-                        <td>서울 9F</td>
-                        <td>2025-03-31</td>
-                        <td>2025-10-04</td>
-                        <td>lotte</td>
-                        <td>31000</td>
-                        <td>192.168.110.93</td>
-                        <td>개인</td>
-                        <td>thin 15B V13E</td>
-                        <td>L38103A23432</td>
-                        <td>2025-03-31</td>
-                        <td>비고</td>
-                        <td><button>변경</button></td>
-                    </tr>
+                    {assetsData && assetsData.length > 0 ?
+                        (assetsData.map((d, i) => (
+                            <tr key={i} className='assetTableTr'>
+                                <td>{d.asset_id}</td>
+                                <td>
+                                    <div>
+                                        <button onClick={() => modifyAssets(d)}>{d.asset_type}</button>
+                                    </div>
+                                </td>
+                                <td>{d.grade}</td>
+                                <td>{d.emp_name}</td>
+                                <td>{d.emp_id}</td>
+                                <td>{d.org_name}</td>
+                                {/* <td>{d.dept_id}</td> */}
+                                <td>{d.dept_name}</td>
+                                <td>{d.location}</td>
+                                <td>{d.pur_date}</td>
+                                <td>{d.exp_date}</td>
+                                <td>{d.owns_type}</td>
+                                <td>{d.cost}</td>
+                                <td>{d.ipv4_octet1}.{d.ipv4_octet2}.{d.ipv4_octet3}.{d.ipv4_octet4}</td>
+                                <td>{d.usage_type}</td>
+                                <td>{d.model}</td>
+                                <td>{d.serial_num}</td>
+                                <td>{d.repl_date === d.pur_date ? '-' : d.repl_date}</td>
+                                <td>{d.notes}</td>
+                                <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
+                            </tr>
+
+                        )))
+                        :
+                        <div>데이터 없음</div>
+                    }
                 </tbody>
             </table>
-            <button onClick={() => alert(`수정버튼`)}>수정버튼</button>
+
+
+            {modifyWindow && (
+                <ModifyModal
+                    d={selectedAssetsData}
+                    setModifyWindow={setModifyWindow}
+                />
+            )}
+
+            {addModalWindow && (
+                <AddModal
+                    setAddModalWindow={setAddModalWindow}
+                />
+            )
+            }
         </div>
     );
 }

@@ -1,0 +1,105 @@
+/* ====[modifyWindow]==================================================== */
+.modifyWindowBackGround {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(236, 236, 236, 0.7);
+    z-index: 1055;
+}
+
+.AddModalContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 500px;
+    border: 1px solid black;
+    background-color: white;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ============================================== */
+.ownsType {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    background-color: rgb(15, 0, 126);
+    color: white;
+    font-weight: bold;
+}
+
+.closeModifyModal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.closeModifyModal:hover {
+    background-color: red;
+}
+
+/* =================================================================== */
+.AddModalContainer>div {
+    margin-top: 10px;
+}
+
+
+.AddModalContainer input {
+    width: 80px;
+}
+
+.as1 {
+    display: flex;
+    height: 30px;
+    justify-content: space-evenly;
+}
+
+
+.as4>span:nth-child(3) {
+    font-weight: bold;
+    color: red;
+}
+
+.as6 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.as6>div:nth-child(1)>input {
+    display: inline-block;
+    width: 70px;
+}
+
+.as6>div:nth-child(2)>input {
+    display: inline-block;
+    width: 35px;
+}
+
+.as7>textarea {
+    width: 200px;
+    height: 150px;
+}
+
+.modifyButton>button {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+}

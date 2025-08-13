@@ -1,0 +1,25 @@
+.container>div {
+    margin-top: 20px;
+}
+
+.da>button {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+}
+
+.userGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3열 */
+    gap: 10px;
+    /* 아이템 간격 */
+}
+
+.userItem {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.userItem>span:nth-child(1) {}

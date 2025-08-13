@@ -8,6 +8,7 @@ function Header() {
     const [menu, setMenu] = useState();
     const nav = useNavigate();
 
+
     useEffect(() => {
         setMenu(currentPage);
     }, [currentPage])
@@ -23,11 +24,12 @@ function Header() {
         <div className='Header'>
             <div><button onClick={() => selectPage('Assets', '/Assets')}>자산</button></div>
             <div><button onClick={() => selectPage('IPList', '/IPList')}>IP목록</button></div>
-            <div><button onClick={() => selectPage('USB', '/USB')}>USB</button></div>
-            <div><button onClick={() => selectPage('Log', '/Log')}>로그</button></div>
             <div><button onClick={() => selectPage('UnauthSW', '/UnauthSW')}>미인가</button></div>
             <div><button onClick={() => selectPage('', '/Str')}>조직도</button></div>
-            <div><button onClick={() => selectPage('', '/Add')}>추가</button></div>
+
+
+
+
         </div>
     );
 }
