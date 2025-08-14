@@ -11,15 +11,25 @@
 .userGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* 3열 */
-    gap: 10px;
-    /* 아이템 간격 */
+    gap: 7px;
+    overflow-y: scroll;
 }
 
 .userItem {
+    display: flex;
+    width: 110px;
+    height: 14px;
+    line-height: 14px;
+    font-size: 12px;
     padding: 5px;
-    border: 1px solid #ccc;
+    background-color: rgb(255, 209, 209);
     border-radius: 4px;
 }
 
-.userItem>span:nth-child(1) {}
+.userItem>div:nth-child(1) {
+    width: 40px;
+    height: 100%;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+}

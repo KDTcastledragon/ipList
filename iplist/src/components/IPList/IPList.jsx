@@ -28,7 +28,7 @@ function IPList() {
             })
     }, [])
 
-    const users = Array.from({ length: 250 }, (_, i) => `사용자${i + 1}`);
+    // const users = Array.from({ length: 250 }, (_, i) => `사용자${i + 1}`);
 
     return (
         <div className='container'>
@@ -41,12 +41,23 @@ function IPList() {
                 <button>110</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div className='userGrid'>
-                {users.map((user, index) => (
+                {/* {users.map((user, index) => (
                     <div key={index} className='userItem'>
                         <span>{index + 1}</span>
                         <span>{user}</span>
                     </div>
-                ))}
+                ))} */}
+                {assetsData && assetsData.length > 0 ? (
+                    assetsData.map((d, i) => (
+                        <div className='userItem' key={i}>
+                            <div>{d.ipv4_octet4}</div>
+                            <div>{d.emp_name}</div>
+                        </div>
+                    ))
+                )
+                    :
+                    <div>Error</div>
+                }
             </div>
         </div>
     );
