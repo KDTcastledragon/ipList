@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.iplist.ipboot.mapper.ExtDevMapper">
+<select id="allExtDevs" resultType="com.iplist.ipboot.domain.ExtDevDTO">
+ select * from ext_dev;
+</select>
+
+<insert id="addExtDev" parameterType="map">
+insert into ext_dev (dev_id, dev_type, registered_dlp, controlled_dlp,
+            emp_id, emp_name, dept_id, dept_name,
+            cmd_model, cmd_serial_num, dlp_model, dlp_serial_num,
+            capacity, manufacturer, usage_purpose, location,
+            pur_date, valid_date, cost, notes)
+            values ( #{devId}, #{devType}, #{registeredDlp}, #{controlledDlp},
+            #{empId}, #{empName}, #{deptId}, #{deptName},
+            #{cmdModel}, #{cmdSerialNum}, #{dlpModel}, #{dlpSerialNum},
+            #{capacity}, #{manufacturer}, #{usagePurpose}, #{location},
+            #{purDate}, #{validDate}, #{cost}, #{notes});
+</insert>
+
+<select id="searchWord" parameterType="String" resultType="com.iplist.ipboot.domain.ExtDevDTO">
+select * from ext_dev 
+		WHERE dev_id LIKE CONCAT('%', #{enteredWord}, '%')
+       OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
+       OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
+       OR dept_name LIKE CONCAT('%', #{enteredWord}, '%')
+       OR location LIKE CONCAT('%', #{enteredWord}, '%');
+</select>
+</mapper>

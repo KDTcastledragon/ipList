@@ -60,21 +60,21 @@ public class AssetController {
 		return ResponseEntity.ok().body(searchedList);
 	}
 
-	@PostMapping("/typeAsset")
-	public ResponseEntity<?> typeAsset(@RequestBody Map<String, Object> requestData) {
-		log.info("typeAsset: " + requestData);
-
-		String type = (String) requestData.get("type");
-
-		try {
-			log.info("typeAsset");
-			List<AssetDTO> List = assetservice.typeAsset(type);
-			log.info("typeAsset 확인 : " + List);
-			return ResponseEntity.ok(List);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
+	//	@PostMapping("/typeAsset")
+	//	public ResponseEntity<?> typeAsset(@RequestBody Map<String, Object> requestData) {
+	//		log.info("typeAsset: " + requestData);
+	//
+	//		String type = (String) requestData.get("type");
+	//
+	//		try {
+	//			log.info("typeAsset");
+	//			List<AssetDTO> List = assetservice.typeAsset(type);
+	//			log.info("typeAsset 확인 : " + List);
+	//			return ResponseEntity.ok(List);
+	//		} catch (Exception e) {
+	//			throw e;
+	//		}
+	//	}
 
 	@PostMapping("/modifyAsset")
 	public ResponseEntity<?> modifyAsset(@RequestBody Map<String, Object> requestData) {

@@ -23,15 +23,6 @@ function Assets() {
 
     //==[2. 모달창 오픈시에 자동으로 Esc 키 이벤트를 감지하도록 설정]=============================================================
     useEffect(() => {
-        axios
-            .get(`/asset/allAssets`)
-            .then((r) => {
-                // alert(`올 에셋 성공`);
-                setAssetsData(r.data);
-            }).catch((e) => {
-                alert(`${e.message}`);
-            })
-
         window.addEventListener('keydown', handleEscKey);
 
         return () => {
@@ -41,6 +32,16 @@ function Assets() {
     }, []);
 
 
+    function allAssets() {
+        axios
+            .get(`/asset/allAssets`)
+            .then((r) => {
+                alert(`올 에셋 성공`);
+                setAssetsData(r.data);
+            }).catch((e) => {
+                alert(`${e.message}`);
+            })
+    }
 
     function modifyAssets(data) {
         setModifyWindow(true);
@@ -63,6 +64,8 @@ function Assets() {
             <div>
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
                 <button onClick={() => searchWord(enteredWord)}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => allAssets()}>모든 자산</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button onClick={() => setAddModalWindow(true)}>자산추가</button>
             </div>
