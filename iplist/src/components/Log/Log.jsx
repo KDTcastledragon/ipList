@@ -21,23 +21,9 @@ function Log() {
 
     return (
         <>
-            <h1>LOg</h1>
-            <div><button onClick={() => allEmp()}>사원목록 출력해보기</button></div>
+            <div>
 
-            <table>
-                <thead>
-                    <tr>id</tr>
-                    <tr>name</tr>
-                    <tr>name</tr>
-                    <tr>name</tr>
-                    <tr>name</tr>
-                    <tr>name</tr>
-                    <tr>name</tr>
-                </thead>
-                <tbody>
-                    <tr></tr>
-                </tbody>
-            </table>
+            </div>
         </>
     );
 }

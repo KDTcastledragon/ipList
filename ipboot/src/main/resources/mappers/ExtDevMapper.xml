@@ -28,6 +28,11 @@ select * from ext_dev
        OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
        OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
        OR dept_name LIKE CONCAT('%', #{enteredWord}, '%')
+       OR cmd_model LIKE CONCAT('%', #{enteredWord}, '%')
+       OR cmd_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
+       OR dlp_model LIKE CONCAT('%', #{enteredWord}, '%')
+       OR dlp_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
+       OR usage_purpose LIKE CONCAT('%', #{enteredWord}, '%')
        OR location LIKE CONCAT('%', #{enteredWord}, '%');
 </select>
 </mapper>

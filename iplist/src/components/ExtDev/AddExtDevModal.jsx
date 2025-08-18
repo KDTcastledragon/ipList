@@ -26,6 +26,7 @@ function AddExtDevModal({ setAddModalWindow }) {
     const [controlledDlp, setControlledDlp] = useState(0);
     const [empId, setEmpId] = useState();
     const [empName, setEmpName] = useState();
+    const [empList, setEmpList] = useState();
     const [deptId, setDeptId] = useState();
     const [deptName, setDeptName] = useState();
     const [cmdModel, setCmdModel] = useState();
@@ -44,6 +45,20 @@ function AddExtDevModal({ setAddModalWindow }) {
     function cancelAddExtDev() {
         setAddModalWindow(false);
     }
+
+    // const showEmpList = async (e) => {
+    //     const value = e.target.value;
+    //     setEmpName(value);
+
+    //     if (value !== null && value.length > 1) {
+    //         try {
+    //             const response = await axios.get(`/emp/showEmpList?emp=${empName}`);
+    //             setEmpList(response.data);
+    //         } catch (e) {
+    //             console.log(`failed EMp LIST`);
+    //         }
+    //     }
+    // }
 
     function addExtDev() {
         const extDevData = {
@@ -122,6 +137,21 @@ function AddExtDevModal({ setAddModalWindow }) {
                         <div>
                             <span>사용자 : </span>
                             <input type="text" value={empName} onChange={(e) => setEmpName(e.target.value)} />
+                            {/* <input type="text" value={empName} onChange={showEmpList} /> */}
+                            {/* {empList.length > 0 && (
+                                <ul>
+                                    {empList.map((d, i) => (
+                                        <li
+                                            key={i}
+                                            onClick={() => {
+                                                setEmpName(d.emp_name);
+                                                setEmpId(d.emp_id);
+                                            }} >
+                                            {d.empId}/{d.empName}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )} */}
                         </div>
                         <div>
                             <span>부서 : </span>

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 function ExtDev() {
     const [enteredWord, setEnteredWord] = useState('');
+    const [selectedOpt, setSelectedOpt] = useState('');
     const [extDevData, setExtDevData] = useState([]);
     const [selectedAssetsData, setSelectedAssetsData] = useState(null);
     const [modifyWindow, setModifyWindow] = useState(false);
@@ -57,13 +58,33 @@ function ExtDev() {
             })
     }
 
+    function optSearch() {
+        axios
+            .get(`/extDev/searchWord?word=${selectedOpt}`)
+            .then((r) => {
+                setExtDevData(r.data);
+            }).catch((e) => {
+                alert(`실패.`);
+            })
+    }
+
     return (
         <div className='ExtDevContainer'>
             <div className='searchAddBox'>
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
                 <button onClick={() => searchWord(enteredWord)}>검색</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select value={selectedOpt} onChange={(e) => setSelectedOpt(e.target.value)}>
+                    <option value="USB">USB</option>
+                    <option value="카드리더기">카드리더기</option>
+                    <option value="외장하드">외장하드</option>
+                </select>
+                <button onClick={() => optSearch(selectedOpt)}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button onClick={() => setAddModalWindow(true)}>자산추가</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <table className='extDevTable'>
                 <thead>
@@ -99,9 +120,9 @@ function ExtDev() {
                                 <td>
                                     <span onClick={() => modifyAssets(d)}>{d.dev_type}</span>
                                 </td>
-                                <td>{d.registered_dlp === 1 ? 'O' : 'X'}</td>
-                                <td>{d.controlled_dlp === 1 ? 'O' : 'X'}</td>
-                                <td>{d.emp_id}</td>
+                                <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
+                                <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
+                                <td>{d.emp_id === null ? '-' : d.emp_id}</td>
                                 <td>{d.emp_name}</td>
                                 <td>{d.dept_name}</td>
                                 <td>{d.cmd_model}</td>

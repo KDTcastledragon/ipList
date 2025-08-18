@@ -22,11 +22,14 @@ function Header() {
 
     return (
         <div className='Header'>
-            <div><button onClick={() => selectPage('Assets', '/Assets')}>자산</button></div>
-            <div><button onClick={() => selectPage('ExtDev', '/ExtDev')}>외부장비</button></div>
-            <div><button onClick={() => selectPage('IPList', '/IPList')}>IP목록</button></div>
-            <div><button onClick={() => selectPage('UnauthSW', '/UnauthSW')}>미인가</button></div>
-            <div><button onClick={() => selectPage('Log', '/Log')}>Log</button></div>
+            <div className='headerTitle'><span>자산관리</span></div>
+            <div className='headerMenuButton'>
+                {/* <div><button onClick={() => selectPage('Assets', '/Assets')}>자산</button></div> */}
+                <div><button onClick={() => selectPage('ExtDev', '/ExtDev')}>외부장비</button></div>
+                {/* <div><button onClick={() => selectPage('IPList', '/IPList')}>IP목록</button></div> */}
+                {/* <div><button onClick={() => selectPage('UnauthSW', '/UnauthSW')}>미인가</button></div> */}
+                <div><button onClick={() => selectPage('Log', '/Log')}>Log</button></div>
+            </div>
 
 
 

@@ -2,12 +2,12 @@ import axios from 'axios';
 import './ModifyExtDevModal.css';
 import { useState, useEffect } from 'react';
 
-function ModifyExtDevModal({ d, setAddModalWindow }) {
+function ModifyExtDevModal({ d, setModifyWindow }) {
 
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
     function handleEscKey(e) {
         if (e.key === 'Escape') {
-            setAddModalWindow(false);
+            setModifyWindow(false);
         }
     };
 
@@ -43,7 +43,7 @@ function ModifyExtDevModal({ d, setAddModalWindow }) {
     const [notes, setNotes] = useState(d.notes);
 
     function cancelAddExtDev() {
-        setAddModalWindow(false);
+        setModifyWindow(false);
     }
 
     function modifyExtDev() {
@@ -78,7 +78,7 @@ function ModifyExtDevModal({ d, setAddModalWindow }) {
         <div className='modifyWindowBackGround'>
             <div className='AddExtDevModalContainer'>
                 <div className='closeModifyModalBox' >
-                    <button onClick={() => setAddModalWindow(false)}>X</button>
+                    <button onClick={() => setModifyWindow(false)}>X</button>
                 </div>
                 <div className='addExtDevTitle'><span>외부장비 수정</span></div>
                 <div className='insertExtDevData'>
@@ -169,7 +169,7 @@ function ModifyExtDevModal({ d, setAddModalWindow }) {
                 </div> {/** insertData  */}
                 <div className='modifyExtDevButton'>
                     <button onClick={() => modifyExtDev()}>수정</button>
-                    <button onClick={() => setAddModalWindow(false)}>취소</button>
+                    <button onClick={() => setModifyWindow(false)}>취소</button>
                 </div>
             </div>
         </div>
