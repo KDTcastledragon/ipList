@@ -37,9 +37,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
     const [manufacturer, setManufacturer] = useState(d.manufacturer);
     const [usagePurpose, setUsagePurpose] = useState(d.usage_purpose);
     const [location, setLocation] = useState(d.location);
-    const [purDate, setPurDate] = useState(d.pur_date);
     const [validDate, setValidDate] = useState(d.valid_date);
-    const [cost, setCost] = useState(d.cost);
     const [notes, setNotes] = useState(d.notes);
 
     function cancelAddExtDev() {
@@ -57,17 +55,15 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
             deptName: deptName,
             usagePurpose: usagePurpose,
             location: location,
-            purDate: purDate,
             validDate: validDate,
-            cost: cost,
             notes: notes
         };
 
         axios
-            .post(`/extDev/addExtDev`, extDevData)
+            .post(`/extDev/modifyExtDev`, extDevData)
             .then(() => {
-                alert('외부저장장치 등록 성공');
-                // setAddModalWindow(false); // 모달 닫기
+                alert('수정 성공');
+                setModifyWindow(false); // 모달 닫기
             })
             .catch((e) => {
                 alert(`등록 실패: ${e.message}`);

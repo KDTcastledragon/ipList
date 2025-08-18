@@ -26,7 +26,7 @@ public class ExtDevServiceImpl implements ExtDevService {
 	}
 
 	@Override
-	public void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String purDate, String validDate, Integer cost, String notes) {
+	public void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes) {
 
 		Map<String, Object> param = new HashMap<>();
 
@@ -46,9 +46,7 @@ public class ExtDevServiceImpl implements ExtDevService {
 		param.put("manufacturer", manufacturer);
 		param.put("usagePurpose", usagePurpose);
 		param.put("location", location);
-		param.put("purDate", purDate);
 		param.put("validDate", validDate);
-		param.put("cost", cost);
 		param.put("notes", notes);
 
 		extmapper.addExtDev(param);

@@ -14,12 +14,12 @@ insert into ext_dev (dev_id, dev_type, registered_dlp, controlled_dlp,
             emp_id, emp_name, dept_id, dept_name,
             cmd_model, cmd_serial_num, dlp_model, dlp_serial_num,
             capacity, manufacturer, usage_purpose, location,
-            pur_date, valid_date, cost, notes)
+            valid_date, notes)
             values ( #{devId}, #{devType}, #{registeredDlp}, #{controlledDlp},
             #{empId}, #{empName}, #{deptId}, #{deptName},
             #{cmdModel}, #{cmdSerialNum}, #{dlpModel}, #{dlpSerialNum},
             #{capacity}, #{manufacturer}, #{usagePurpose}, #{location},
-            #{purDate}, #{validDate}, #{cost}, #{notes});
+            #{validDate}, #{notes});
 </insert>
 
 <select id="searchWord" parameterType="String" resultType="com.iplist.ipboot.domain.ExtDevDTO">

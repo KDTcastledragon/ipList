@@ -8,8 +8,8 @@ public interface ExtDevService {
 
 	List<ExtDevDTO> allExtDevs();
 
-	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String purDate, String validDate, Integer cost, String notes);
-
 	List<ExtDevDTO> searchWord(String enteredWord);
+
+	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes);
 
 }
