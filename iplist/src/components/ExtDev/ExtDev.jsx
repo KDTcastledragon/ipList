@@ -1,8 +1,8 @@
 import './ExtDev.css';
 import axios from 'axios';
 
-import ModifyModal from './ModifyExtDevModal';
-import AddModal from './AddExtDevModal';
+import ModifyExtDevModal from './ModifyExtDevModal';
+import AddExtDevModal from './AddExtDevModal';
 import { useEffect, useState } from 'react';
 
 
@@ -22,7 +22,7 @@ function ExtDev() {
     };
 
 
-    //==[2. 외부장비 목록 & 모달창 오픈시에 자동으로 Esc 키 이벤트를 감지하도록 설정]=============================================================
+    //==[2. 외부장비 목록출력 & 모달창 오픈시에 자동으로 Esc 키 이벤트를 감지하도록 설정]=============================================================
     useEffect(() => {
         axios
             .get(`/extDev/allExtDevs`)
@@ -43,6 +43,7 @@ function ExtDev() {
 
     }, []);
 
+    //==[ 외부장비 정보 수정 ]=============================================================
     function modifyAssets(data) {
         setModifyWindow(true);
         setSelectedAssetsData(data);
@@ -75,7 +76,13 @@ function ExtDev() {
                 <button onClick={() => searchWord(enteredWord)}>검색</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select value={selectedOpt} onChange={(e) => setSelectedOpt(e.target.value)}>
+                <select
+                    value={selectedOpt}
+                    onChange={(e) => {
+                        setSelectedOpt(e.target.value);
+                        // optSearch(e.target.value);
+                    }}
+                >
                     <option value="USB">USB</option>
                     <option value="카드리더기">카드리더기</option>
                     <option value="외장하드">외장하드</option>
@@ -83,7 +90,7 @@ function ExtDev() {
                 <button onClick={() => optSearch(selectedOpt)}>검색</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button onClick={() => setAddModalWindow(true)}>자산추가</button>
+                <button onClick={() => setAddModalWindow(true)}>신규장비 등록</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <table className='extDevTable'>
@@ -105,8 +112,6 @@ function ExtDev() {
                         <th>위치</th>
                         <th>용량</th>
                         <th>제조사</th>
-                        {/* <th>비용</th> */}
-                        {/* <th>구매일</th> */}
                         <th>비고</th>
                         <th>변경</th>
                         <th></th>
@@ -134,8 +139,6 @@ function ExtDev() {
                                 <td>{d.location}</td>
                                 <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${d.capacity / 1024}TB` : `${d.capacity}GB`}</td>
                                 <td>{d.manufacturer}</td>
-                                {/* <td>{d.cost}</td> */}
-                                {/* <td>{d.pur_date}</td> */}
                                 <td>{d.notes}</td>
                                 <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
                             </tr>
@@ -149,14 +152,14 @@ function ExtDev() {
 
 
             {modifyWindow && (
-                <ModifyModal
+                <ModifyExtDevModal
                     d={selectedAssetsData}
                     setModifyWindow={setModifyWindow}
                 />
             )}
 
             {addModalWindow && (
-                <AddModal
+                <AddExtDevModal
                     setAddModalWindow={setAddModalWindow}
                 />
             )

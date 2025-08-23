@@ -5,34 +5,88 @@
 
 
 <mapper namespace="com.iplist.ipboot.mapper.ExtDevMapper">
-<select id="allExtDevs" resultType="com.iplist.ipboot.domain.ExtDevDTO">
- select * from ext_dev;
-</select>
+	<select id="allExtDevs"
+		resultType="com.iplist.ipboot.domain.ExtDevDTO">
+		select * from ext_dev;
+	</select>
 
-<insert id="addExtDev" parameterType="map">
-insert into ext_dev (dev_id, dev_type, registered_dlp, controlled_dlp,
-            emp_id, emp_name, dept_id, dept_name,
-            cmd_model, cmd_serial_num, dlp_model, dlp_serial_num,
-            capacity, manufacturer, usage_purpose, location,
-            valid_date, notes)
-            values ( #{devId}, #{devType}, #{registeredDlp}, #{controlledDlp},
-            #{empId}, #{empName}, #{deptId}, #{deptName},
-            #{cmdModel}, #{cmdSerialNum}, #{dlpModel}, #{dlpSerialNum},
-            #{capacity}, #{manufacturer}, #{usagePurpose}, #{location},
-            #{validDate}, #{notes});
-</insert>
+	<insert id="addExtDev" parameterType="map">
+		insert into ext_dev
+		(dev_id, dev_type, registered_dlp, controlled_dlp,
+		emp_id, emp_name,
+		dept_id, dept_name,
+		cmd_model, cmd_serial_num, dlp_model,
+		dlp_serial_num,
+		capacity, manufacturer, usage_purpose, location,
+		valid_date, notes)
+		values ( #{devId}, #{devType}, #{registeredDlp},
+		#{controlledDlp},
+		#{empId}, #{empName}, #{deptId}, #{deptName},
+		#{cmdModel}, #{cmdSerialNum}, #{dlpModel}, #{dlpSerialNum},
+		#{capacity}, #{manufacturer}, #{usagePurpose}, #{location},
+		#{validDate}, #{notes});
+	</insert>
 
-<select id="searchWord" parameterType="String" resultType="com.iplist.ipboot.domain.ExtDevDTO">
-select * from ext_dev 
-		WHERE dev_id LIKE CONCAT('%', #{enteredWord}, '%')
-       OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
-       OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
-       OR dept_name LIKE CONCAT('%', #{enteredWord}, '%')
-       OR cmd_model LIKE CONCAT('%', #{enteredWord}, '%')
-       OR cmd_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
-       OR dlp_model LIKE CONCAT('%', #{enteredWord}, '%')
-       OR dlp_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
-       OR usage_purpose LIKE CONCAT('%', #{enteredWord}, '%')
-       OR location LIKE CONCAT('%', #{enteredWord}, '%');
-</select>
+	<select id="searchWord" parameterType="String"
+		resultType="com.iplist.ipboot.domain.ExtDevDTO">
+		select * from ext_dev
+		WHERE dev_id LIKE CONCAT('%',
+		#{enteredWord}, '%')
+		OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
+		OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
+		OR dept_name LIKE
+		CONCAT('%', #{enteredWord}, '%')
+		OR cmd_model LIKE CONCAT('%',
+		#{enteredWord}, '%')
+		OR cmd_serial_num LIKE CONCAT('%', #{enteredWord},
+		'%')
+		OR dlp_model LIKE CONCAT('%', #{enteredWord}, '%')
+		OR
+		dlp_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
+		OR usage_purpose
+		LIKE CONCAT('%', #{enteredWord}, '%')
+		OR location LIKE CONCAT('%',
+		#{enteredWord}, '%');
+	</select>
+
+	<update id="modifyExtDev2" parameterType="map">
+
+	</update>
+	
+	<update id="modifyExtDev" parameterType="map">
+		update ext_dev
+		<set>
+			<if test="registeredDlp != null">
+				registered_dlp = #{registeredDlp},
+			</if>
+			<if test="controlledDlp != null">
+				controlled_dlp = #{controlledDlp},
+			</if>
+			<if test="empId != null">
+				emp_id = #{empId},
+			</if>
+			<if test="empName != null">
+				emp_name = #{empName},
+			</if>
+			<if test="deptId != null">
+				dept_id = #{deptId},
+			</if>
+			<if test="deptName != null">
+				dept_name = #{deptName},
+			</if>
+			<if test="usagePurpose != null">
+				usage_purpose = #{usagePurpose},
+			</if>
+			<if test="location != null">
+				location = #{location},
+			</if>
+			<if test="validDate != null">
+				valid_date = #{validDate},
+			</if>
+			<if test="notes != null">
+				notes = #{notes}
+			</if>
+		</set>
+		where dev_id = #{devId};
+	</update>
 </mapper>

@@ -1,10 +1,11 @@
 import './App.css';
-import MainHome from './components/Home/MainHome';
+
+import PagePather from './components/PagePather/PagePather';
 
 function App() {
   return (
     <div className="App">
-      <MainHome></MainHome>
+      <PagePather></PagePather>
     </div>
   );
 }

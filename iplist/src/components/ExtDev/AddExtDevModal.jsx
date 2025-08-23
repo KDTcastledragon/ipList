@@ -1,5 +1,7 @@
-import axios from 'axios';
 import './AddExtDevModal.css';
+import './ModalCommon.css';
+
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 function AddExtDevModal({ setAddModalWindow }) {
@@ -96,12 +98,12 @@ function AddExtDevModal({ setAddModalWindow }) {
     }
 
     return (
-        <div className='modifyWindowBackGround'>
-            <div className='AddExtDevModalContainer'>
-                <div className='closeModifyModalBox' >
+        <div className='ExtDevModalWindowBackGround'>
+            <div className='ExtDevModalContainer'>
+                <div className='closeExtDevModalBox' >
                     <button onClick={() => setAddModalWindow(false)}>X</button>
                 </div>
-                <div className='addExtDevTitle'><span>외부장비 등록</span></div>
+                <div className='addExtDevTitle'><span>신규장비 등록</span></div>
                 <div className='insertExtDevData'>
                     <div className='insertDataLeft'>
                         <div className='devId'>

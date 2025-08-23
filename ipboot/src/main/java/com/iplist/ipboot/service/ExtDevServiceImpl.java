@@ -58,4 +58,24 @@ public class ExtDevServiceImpl implements ExtDevService {
 		List<ExtDevDTO> list = extmapper.searchWord(enteredWord);
 		return list;
 	}
+
+	@Override
+	public void modifyExtDev(Map<String, Object> data) {
+		if (!data.containsKey("devId")) {
+			log.info("관리번호가 없습니다. : " + data);
+			throw new RuntimeException("관리번호(devId)가 필요합니다.");
+		}
+
+		extmapper.modifyExtDev(data); // MyBatis XML에 data Map 전달
+	}
+
+	@Override
+	public void modifyExtDev2(Map<String, Object> data) {
+		if (!data.containsKey("devId")) {
+			log.info("관리번호가 없습니다. : " + data);
+			throw new RuntimeException("관리번호(devId)가 필요합니다.");
+		}
+
+		extmapper.modifyExtDev2(data); // MyBatis XML에 data Map 전달
+	}
 }

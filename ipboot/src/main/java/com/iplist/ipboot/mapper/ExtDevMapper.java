@@ -16,4 +16,8 @@ public interface ExtDevMapper {
 
 	List<ExtDevDTO> searchWord(String enteredWord);
 
+	void modifyExtDev(Map<String, Object> data);
+
+	void modifyExtDev2(Map<String, Object> data);
+
 }
