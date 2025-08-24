@@ -55,8 +55,8 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
         const extDevData = {
             devId: devId,
             devType: devType,
-            registeredDlp: registeredDlp,
-            controlledDlp: controlledDlp,
+            registeredDlp: registeredDlp === 'true' ? 1 : 0,
+            controlledDlp: controlledDlp === 'true' ? 1 : 0,
             empId: empId,
             empName: empName,
             deptId: deptId,
@@ -149,7 +149,12 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <span>DLP등록여부 : </span>
                             <select value={registeredDlp} onChange={(e) => {
                                 if (!isModifying) { return }
-                                setRegisteredDlp(e.target.value);
+                                else if (e.target.value === 'false' && controlledDlp === 'true') {
+                                    alert(`DLP통제여부 '미등록' 변경.`);
+                                    setControlledDlp('false');
+                                } else {
+                                    setRegisteredDlp(e.target.value);
+                                }
                             }}>
                                 <option value='true'>등록</option>
                                 <option value='false'>미등록</option>
@@ -159,7 +164,12 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <span>DLP통제여부 : </span>
                             <select value={controlledDlp} onChange={(e) => {
                                 if (!isModifying) { return }
-                                setControlledDlp(e.target.value)
+                                else if (registeredDlp === 'false' && e.target.value === 'true') {
+                                    alert(`DLP등록 후 가능합니다.(현재 미등록 상태)`);
+                                    return;
+                                } else {
+                                    setControlledDlp(e.target.value)
+                                }
                             }}>
 
                                 <option value='true'>등록</option>
@@ -184,11 +194,15 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                         </div>
                         <div>
                             <span>사용상태 : </span>
-                            <select value={devStatus} onChange={(e) => {
-                                if (!isModifying) { return }
-                                setDevStatus(e.target.value)
+                            <select value={devStatus} disabled={!isModifying} onChange={(e) => {
+                                if (!isModifying) {
+                                    return
+                                };
                                 if (e.target.value === 'discarded') {
                                     alert(`폐기 처리합니다. 주의하세요.`);
+                                    setDevStatus(e.target.value);
+                                } else {
+                                    setDevStatus(e.target.value);
                                 }
                             }}>
                                 <option value='using'>사용중</option>
@@ -238,9 +252,6 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                         </div>
                     </div> {/**============================ DataRight ============================ */}
 
-
-
-
                 </div> {/** insertData  */}
                 <div className='modalExtDevButton'>
                     {isModifying === false ?
@@ -251,7 +262,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                         :
                         <div className='isModifyingTrue'>
                             <button onClick={() => modifyExtDev()}>수정완료</button>
-                            <button onClick={() => setIsModifying(false)}>수정취소</button>
+                            <button onClick={() => setIsModifying(false)}>이전으로</button>
                         </div>
                     }
 

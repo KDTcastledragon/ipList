@@ -112,6 +112,7 @@ function ExtDev() {
                         <th>위치</th>
                         <th>용량</th>
                         <th>제조사</th>
+                        <th>사용여부</th>
                         <th>비고</th>
                         <th>변경</th>
                         <th></th>
@@ -139,6 +140,7 @@ function ExtDev() {
                                 <td>{d.location}</td>
                                 <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${d.capacity / 1024}TB` : `${d.capacity}GB`}</td>
                                 <td>{d.manufacturer}</td>
+                                <td>{d.dev_status}</td>
                                 <td>{d.notes}</td>
                                 <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
                             </tr>

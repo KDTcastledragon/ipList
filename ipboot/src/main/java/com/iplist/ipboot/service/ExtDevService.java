@@ -11,10 +11,13 @@ public interface ExtDevService {
 
 	List<ExtDevDTO> searchWord(String enteredWord);
 
-	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes);
+	void addExtDev(Map<String, Object> data);
 
 	void modifyExtDev(Map<String, Object> data);
 
 	void modifyExtDev2(Map<String, Object> data);
 
+	List<ExtDevDTO> allLogs();
+
+	//	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes);
 }

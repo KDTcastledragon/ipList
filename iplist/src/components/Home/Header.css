@@ -1,26 +1,69 @@
 .Header {
     width: 100%;
-    height: 50px;
+    height: 150px;
     margin-top: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 18px;
     /* background-color: aquamarine; */
 }
 
-.Header>.headerTitle {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 40px;
+.header1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
     margin-bottom: 40px;
-
 }
 
-.Header>.headerTitle>span {
+.headerTitle {
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.loginedAdmin {
+    margin-left: auto;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+
+.loginedAdmin>span {
+    display: inline-block;
+    height: 100%;
+    line-height: 50px;
+    font-size: 17px;
+    width: 100px;
+    /* background-color: rgb(163, 194, 255); */
+}
+
+.loginedAdmin>button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.loginedAdmin>button:hover {
+    background-color: rgb(218, 218, 218);
+    color: black;
+    cursor: pointer;
+}
+
+.header1>.headerTitle>span {
     font-size: 28px;
     font-weight: bold;
     transition: transform 0.9s ease;
 }
 
-.Header>.headerTitle>span:hover {
+.header1>.headerTitle>span:hover {
     cursor: pointer;
     transform: scale(1.1);
 

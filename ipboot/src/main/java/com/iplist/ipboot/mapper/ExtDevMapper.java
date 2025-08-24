@@ -20,4 +20,6 @@ public interface ExtDevMapper {
 
 	void modifyExtDev2(Map<String, Object> data);
 
+	List<ExtDevDTO> allLogs();
+
 }
