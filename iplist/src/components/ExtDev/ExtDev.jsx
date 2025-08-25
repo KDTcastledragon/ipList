@@ -96,6 +96,7 @@ function ExtDev() {
             <table className='extDevTable'>
                 <thead>
                     <tr>
+
                         <th>관리번호</th>
                         <th>장비종류</th>
                         <th>DLP등록</th>
