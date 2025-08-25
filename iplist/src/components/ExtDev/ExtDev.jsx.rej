@@ -1,0 +1,10 @@
+diff a/iplist/src/components/ExtDev/ExtDev.jsx b/iplist/src/components/ExtDev/ExtDev.jsx	(rejected hunks)
+@@ -132,8 +132,6 @@
+                                 <td>{d.location}</td>
+                                 <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${d.capacity / 1024}TB` : `${d.capacity}GB`}</td>
+                                 <td>{d.manufacturer}</td>
+-                                {/* <td>{d.cost}</td> */}
+-                                {/* <td>{d.pur_date}</td> */}
+                                 <td>{d.notes}</td>
+                                 <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
+                             </tr>
