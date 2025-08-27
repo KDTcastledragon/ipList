@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iplist.ipboot.domain.ExtDevDTO;
+import com.iplist.ipboot.domain.ExtDevLogHistDTO;
 import com.iplist.ipboot.service.AssetService;
 import com.iplist.ipboot.service.EmpService;
 import com.iplist.ipboot.service.ExtDevService;
@@ -76,17 +77,35 @@ public class ExtDevController {
 		}
 	}
 
-	@GetMapping("/allLogs")
-	public ResponseEntity<?> allLogs() {
+	@GetMapping("/selectLogs")
+	public ResponseEntity<?> selectLogs(@RequestParam(value = "logWord", required = false) String logWord) {
 		try {
-			log.info("allLogs");
-			List<ExtDevDTO> list = extservice.allLogs();
-			log.info("allExtDevs 확인 : " + list);
-			return ResponseEntity.ok(list);
+			log.info("selectLogs : " + logWord);
+			if (logWord == null) {
+				List<ExtDevLogHistDTO> logList = extservice.allLogs();
+				log.info("logList : " + logList);
+				return ResponseEntity.ok(logList);
+			} else {
+				List<ExtDevLogHistDTO> logList = extservice.logsByWord(logWord);
+				return ResponseEntity.ok(logList);
+			}
 		} catch (Exception e) {
 			throw e;
 		}
+
 	}
+
+	//	@GetMapping("/allLogs_legacy")
+	//	public ResponseEntity<?> allLogs() {
+	//		try {
+	//			log.info("allLogs");
+	//			List<ExtDevDTO> list = extservice.allLogs();
+	//			log.info("allExtDevs 확인 : " + list);
+	//			return ResponseEntity.ok(list);
+	//		} catch (Exception e) {
+	//			throw e;
+	//		}
+	//	}
 
 	//	@PostMapping("/addExtDev")
 	//	public ResponseEntity<?> addExtDev(@RequestBody Map<String, Object> data) {

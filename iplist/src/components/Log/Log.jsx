@@ -7,7 +7,7 @@ import axios from 'axios';
 function Log() {
     const [enteredWord, setEnteredWord] = useState('');
     const [selectedOpt, setSelectedOpt] = useState('');
-    const [extDevData, setExtDevData] = useState([]);
+    const [logData, setLogData] = useState([]);
     const [selectedAssetsData, setSelectedAssetsData] = useState(null);
 
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
@@ -21,10 +21,11 @@ function Log() {
     //==[2. 외부장비 목록 & 모달창 오픈시에 자동으로 Esc 키 이벤트를 감지하도록 설정]=============================================================
     useEffect(() => {
         axios
-            .get(`/extDev/allLogs`)
+            .get(`/extDev/selectLogs`)
             .then((r) => {
-                setExtDevData(r.data);
-                console.log(`성공`);
+                setLogData(r.data);
+                console.log('성공:', JSON.stringify(r.data, null, 2));
+                console.table(r.data);
                 // alert(`성공ExtDev`);
             }).catch((e) => {
                 console.log(`${e.message}`);
@@ -39,15 +40,11 @@ function Log() {
 
     }, []);
 
-    function modifyAssets(data) {
-        setSelectedAssetsData(data);
-    }
-
-    function searchWord() {
+    function selectLogs() {
         axios
-            .get(`/extDev/searchWordLog?word=${enteredWord}`)
+            .get(`/extDev/searchWordLog?logWord=${enteredWord}`)
             .then((r) => {
-                setExtDevData(r.data);
+                setLogData(r.data);
             }).catch((e) => {
                 alert(`실패.`);
             })
@@ -57,17 +54,17 @@ function Log() {
         axios
             .get(`/extDev/searchWordLog?word=${selectedOpt}`)
             .then((r) => {
-                setExtDevData(r.data);
+                setLogData(r.data);
             }).catch((e) => {
                 alert(`실패.`);
             })
     }
 
     return (
-        <div className='ExtDevContainer'>
+        <div className='ExtDevLogContainer'>
             <div className='searchAddBox'>
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
-                <button onClick={() => searchWord(enteredWord)}>검색</button>
+                <button onClick={() => selectLogs(enteredWord)}>검색</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <select value={selectedOpt} onChange={(e) => setSelectedOpt(e.target.value)}>
@@ -85,12 +82,12 @@ function Log() {
                 <button onClick={() => optSearch(selectedOpt)}>검색</button>
 
             </div>
-            <table className='extDevTable'>
+            <table className='extDevLogTable'>
                 <thead>
                     <tr>
+                        <th>기록구분</th>
                         <th>관리번호</th>
                         <th>장비종류</th>
-                        <th>구분</th>
                         <th>DLP등록</th>
                         <th>DLP통제</th>
                         <th>사번</th>
@@ -111,14 +108,14 @@ function Log() {
                     </tr>
                 </thead>
                 <tbody>
-                    {extDevData && extDevData.length > 0 ?
-                        (extDevData.map((d, i) => (
+                    {logData && logData.length > 0 ?
+                        (logData.map((d, i) => (
                             <tr key={i} className='extDevLogTableTr'>
+                                <td>{d.log_type}</td>
                                 <td>{d.dev_id}</td>
                                 <td>{d.dev_type}</td>
-                                <td>{d.log_type}</td>
-                                <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
-                                <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
+                                <td>{d.registered_dlp}</td>
+                                <td>{d.controlled_dlp}</td>
                                 <td>{d.emp_id === null ? '-' : d.emp_id}</td>
                                 <td>{d.emp_name}</td>
                                 <td>{d.dept_name}</td>
@@ -129,9 +126,10 @@ function Log() {
                                 <td>{d.valid_date}</td>
                                 <td>{d.usage_purpose}</td>
                                 <td>{d.location}</td>
-                                <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${d.capacity / 1024}TB` : `${d.capacity}GB`}</td>
+                                <td>{d.capacity === null ? '-' : d.capacity}</td>
                                 <td>{d.manufacturer}</td>
                                 <td>{d.notes}</td>
+                                <td>{d.log_timestamp}</td>
 
                             </tr>
 

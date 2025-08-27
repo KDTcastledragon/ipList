@@ -47,6 +47,32 @@
 		OR location LIKE CONCAT('%',
 		#{enteredWord}, '%');
 	</select>
+	
+	 <update id="addExtDev" parameterType="map">
+        CALL add_ext_dev(
+            #{devId, jdbcType=VARCHAR},
+            #{devType, jdbcType=VARCHAR},
+            #{registeredDlp, jdbcType=BOOLEAN},
+            #{controlledDlp, jdbcType=BOOLEAN},
+            #{devStatus, jdbcType=VARCHAR},
+            #{empId, jdbcType=VARCHAR},
+            #{empName, jdbcType=VARCHAR},
+            #{deptId, jdbcType=VARCHAR},
+            #{deptName, jdbcType=VARCHAR},
+            #{location, jdbcType=VARCHAR},
+            #{validDate, jdbcType=DATE},
+            #{usagePurpose, jdbcType=VARCHAR},
+            #{cmdModel, jdbcType=VARCHAR},
+            #{cmdSerialNum, jdbcType=VARCHAR},
+            #{dlpModel, jdbcType=VARCHAR},
+            #{dlpSerialNum, jdbcType=VARCHAR},
+            #{capacity, jdbcType=INTEGER},
+            #{manufacturer, jdbcType=VARCHAR},
+            #{notes, jdbcType=VARCHAR},
+            #{adminId, jdbcType=VARCHAR},
+            #{adminName, jdbcType=VARCHAR}
+        )
+    </update>
 
 	 <update id="modifyExtDev" parameterType="map">
         CALL modify_ext_dev(
@@ -54,55 +80,30 @@
             #{devType, jdbcType=VARCHAR},
             #{registeredDlp, jdbcType=BOOLEAN},
             #{controlledDlp, jdbcType=BOOLEAN},
+            #{devStatus, jdbcType=VARCHAR},
             #{empId, jdbcType=VARCHAR},
             #{empName, jdbcType=VARCHAR},
             #{deptId, jdbcType=VARCHAR},
             #{deptName, jdbcType=VARCHAR},
+            #{location, jdbcType=VARCHAR},
+            #{validDate, jdbcType=DATE},
+            #{usagePurpose, jdbcType=VARCHAR},
             #{cmdModel, jdbcType=VARCHAR},
             #{cmdSerialNum, jdbcType=VARCHAR},
             #{dlpModel, jdbcType=VARCHAR},
             #{dlpSerialNum, jdbcType=VARCHAR},
             #{capacity, jdbcType=INTEGER},
             #{manufacturer, jdbcType=VARCHAR},
-            #{usagePurpose, jdbcType=VARCHAR},
-            #{location, jdbcType=VARCHAR},
-            #{validDate, jdbcType=DATE},
             #{notes, jdbcType=VARCHAR},
-            #{devStatus, jdbcType=VARCHAR},
             #{adminId, jdbcType=VARCHAR},
             #{adminName, jdbcType=VARCHAR}
         )
     </update>
     
-    <select id="allLogs" resultType="com.iplist.ipboot.domain.ExtDevLogDTO">
-    select * from ext_dev_log;
-    </select>
     
-    <update id="addExtDev" parameterType="map">
-        CALL add_ext_dev(
-            #{devId, jdbcType=VARCHAR},
-            #{devType, jdbcType=VARCHAR},
-            #{registeredDlp, jdbcType=BOOLEAN},
-            #{controlledDlp, jdbcType=BOOLEAN},
-            #{empId, jdbcType=VARCHAR},
-            #{empName, jdbcType=VARCHAR},
-            #{deptId, jdbcType=VARCHAR},
-            #{deptName, jdbcType=VARCHAR},
-            #{cmdModel, jdbcType=VARCHAR},
-            #{cmdSerialNum, jdbcType=VARCHAR},
-            #{dlpModel, jdbcType=VARCHAR},
-            #{dlpSerialNum, jdbcType=VARCHAR},
-            #{capacity, jdbcType=INTEGER},
-            #{manufacturer, jdbcType=VARCHAR},
-            #{usagePurpose, jdbcType=VARCHAR},
-            #{location, jdbcType=VARCHAR},
-            #{validDate, jdbcType=DATE},
-            #{notes, jdbcType=VARCHAR},
-            #{devStatus, jdbcType=VARCHAR},
-            #{adminId, jdbcType=VARCHAR},
-            #{adminName, jdbcType=VARCHAR}
-        )
-    </update>
+    <select id="allLogs" resultType="com.iplist.ipboot.domain.ExtDevLogHistDTO">
+    select * from ext_dev_log_view;
+	</select>
 	
 	<update id="modifyExtDev33" parameterType="map">
 		update ext_dev

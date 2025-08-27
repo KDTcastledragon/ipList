@@ -1,4 +1,4 @@
-.ExtDevContainer {
+.ExtDevLogContainer {
     margin: 10px auto;
     max-width: 5000px;
     overflow-x: auto;
@@ -82,7 +82,7 @@
 
 
 /* [스크롤 설정]================================================================================ */
-.extDevTable {
+.extDevLogTable {
     width: auto;
     height: 500px;
     margin: 10px auto;
@@ -93,48 +93,80 @@
     font-size: 11px;
 }
 
-.ExtDevContainer>table>tbody {
+.ExtDevLogContainer>table>tbody {
     display: block;
     max-height: 460px;
     overflow-y: scroll;
 }
 
-.ExtDevContainer>table>thead {
+.ExtDevLogContainer>table>thead {
     display: table;
     width: 100%;
     table-layout: fixed;
     font-size: 12px;
 }
 
-.ExtDevContainer>table>tbody {
+.ExtDevLogContainer>table>tbody {
     table-layout: fixed;
 }
 
+.ExtDevContainer>table>thead,
 .ExtDevContainer>table>tbody>tr {
     display: table;
+    width: 100%;
+    table-layout: auto;
+    /* 가장 긴 내용 기준 자동 조정 */
 }
 
-.ExtDevContainer>table>tbody>tr>td,
-.ExtDevContainer>table>thead>tr>th {
+.ExtDevContainer>table>tbody {
+    display: block;
+    max-height: 460px;
+    overflow-y: scroll;
+}
+
+.extDevLogTable th,
+.extDevLogTable td {
+    border: 1px solid #333;
+    padding: 4px 6px;
+    white-space: nowrap;
+    /* 글자 단위 줄바꿈 방지 */
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.extDevLogTable th,
+.extDevLogTable td {
+    word-break: keep-all;
+    /* 글자 단위 줄바꿈 방지 */
+    white-space: nowrap;
+    /* 한 줄로 유지 */
+    overflow: hidden;
+    /* 넘치면 숨김 */
+    text-overflow: ellipsis;
+    /* ... 처리 */
+}
+
+.ExtDevLogContainer>table>tbody>tr>td,
+.ExtDevLogContainer>table>thead>tr>th {
     border-left: 1px solid rgb(47, 47, 47);
 }
 
-.ExtDevContainer>table>thead {
+.ExtDevLogContainer>table>thead {
     width: calc(100% - 15px);
     background-color: rgb(127, 127, 127);
 }
 
-.ExtDevContainer>table>thead>tr>th {
+.ExtDevLogContainer>table>thead>tr>th {
     font-weight: bold;
 }
 
-.ExtDevContainer>table>thead>tr>th,
-.ExtDevContainer>table>tbody>tr>td {
+.ExtDevLogContainer>table>thead>tr>th,
+.ExtDevLogContainer>table>tbody>tr>td {
     border-bottom: 1px solid black;
 }
 
 /** ======[테이블 변경 버튼] */
-.extDevTable>tbody>tr>td:nth-child(2)>span:hover {
+.extDevLogTable>tbody>tr>td:nth-child(2)>span:hover {
     font-size: 110%;
     font-weight: bold;
     text-decoration: underline;
@@ -142,8 +174,8 @@
 }
 
 /** ==============[사용자/부서 - 강조 효과]========================= */
-.extDevTable>tbody>tr>td:nth-child(6),
-.extDevTable>tbody>tr>td:nth-child(7) {
+.extDevLogTable>tbody>tr>td:nth-child(6),
+.extDevLogTable>tbody>tr>td:nth-child(7) {
     background-color: rgb(243, 212, 37);
 }
 
@@ -151,107 +183,108 @@
 
 /** ==================== [테이블 column 넓이]================================================================== */
 
-.extDevTable>thead>tr>th:nth-child(1),
-.extDevTable>tbody>tr>td:nth-child(1) {
-    width: 90px;
+
+.extDevLogTable>thead>tr>th:nth-child(1),
+.extDevLogTable>tbody>tr>td:nth-child(1) {
+    width: 100px;
     height: 10px;
     line-height: 10px;
     /* background-color: rgb(255, 161, 161); */
 }
 
-.extDevTable>thead>tr>th:nth-child(2),
-.extDevTable>tbody>tr>td:nth-child(2) {
+.extDevLogTable>thead>tr>th:nth-child(2),
+.extDevLogTable>tbody>tr>td:nth-child(2) {
     width: 95px;
     /* background-color: rgb(195, 255, 161); */
 }
 
-.extDevTable>thead>tr>th:nth-child(3),
-.extDevTable>tbody>tr>td:nth-child(3) {
+.extDevLogTable>thead>tr>th:nth-child(3),
+.extDevLogTable>tbody>tr>td:nth-child(3) {
     width: 50px;
     /* background-color: rgb(195, 245, 255); */
 }
 
-.extDevTable>thead>tr>th:nth-child(4),
-.extDevTable>tbody>tr>td:nth-child(4) {
+.extDevLogTable>thead>tr>th:nth-child(4),
+.extDevLogTable>tbody>tr>td:nth-child(4) {
     width: 50px;
     /* background-color: rgb(247, 215, 121); */
 }
 
-.extDevTable>thead>tr>th:nth-child(5),
-.extDevTable>tbody>tr>td:nth-child(5) {
+.extDevLogTable>thead>tr>th:nth-child(5),
+.extDevLogTable>tbody>tr>td:nth-child(5) {
     width: 66px;
     /* background-color: rgb(128, 199, 112); */
 }
 
-.extDevTable>thead>tr>th:nth-child(6),
-.extDevTable>tbody>tr>td:nth-child(6) {
+.extDevLogTable>thead>tr>th:nth-child(6),
+.extDevLogTable>tbody>tr>td:nth-child(6) {
     width: 100px;
     /* background-color: rgb(217, 255, 208); */
 }
 
 
-.extDevTable>thead>tr>th:nth-child(7),
-.extDevTable>tbody>tr>td:nth-child(7) {
+.extDevLogTable>thead>tr>th:nth-child(7),
+.extDevLogTable>tbody>tr>td:nth-child(7) {
     width: 80px;
     /* background-color: rgb(28, 155, 0); */
 }
 
-.extDevTable>thead>tr>th:nth-child(8),
-.extDevTable>tbody>tr>td:nth-child(8) {
+.extDevLogTable>thead>tr>th:nth-child(8),
+.extDevLogTable>tbody>tr>td:nth-child(8) {
     width: 170px;
     /* background-color: rgb(217, 255, 208); */
 }
 
-.extDevTable>thead>tr>th:nth-child(9),
-.extDevTable>tbody>tr>td:nth-child(9) {
+.extDevLogTable>thead>tr>th:nth-child(9),
+.extDevLogTable>tbody>tr>td:nth-child(9) {
     width: 180px;
     /* background-color: rgb(80, 130, 68); */
 }
 
-.extDevTable>thead>tr>th:nth-child(10),
-.extDevTable>tbody>tr>td:nth-child(10) {
+.extDevLogTable>thead>tr>th:nth-child(10),
+.extDevLogTable>tbody>tr>td:nth-child(10) {
     width: 250px;
     /* background-color: rgb(177, 228, 164); */
 }
 
-.extDevTable>thead>tr>th:nth-child(11),
-.extDevTable>tbody>tr>td:nth-child(11) {
+.extDevLogTable>thead>tr>th:nth-child(11),
+.extDevLogTable>tbody>tr>td:nth-child(11) {
     width: 200px;
     /* background-color: rgb(171, 223, 255); */
 }
 
-.extDevTable>thead>tr>th:nth-child(12),
-.extDevTable>tbody>tr>td:nth-child(12) {
+.extDevLogTable>thead>tr>th:nth-child(12),
+.extDevLogTable>tbody>tr>td:nth-child(12) {
     width: 80px;
     /* background-color: rgb(179, 232, 184); */
 }
 
-.extDevTable>thead>tr>th:nth-child(13),
-.extDevTable>tbody>tr>td:nth-child(13) {
+.extDevLogTable>thead>tr>th:nth-child(13),
+.extDevLogTable>tbody>tr>td:nth-child(13) {
     width: 200px;
     /* background-color: rgb(236, 131, 194); */
 }
 
-.extDevTable>thead>tr>th:nth-child(14),
-.extDevTable>tbody>tr>td:nth-child(14) {
+.extDevLogTable>thead>tr>th:nth-child(14),
+.extDevLogTable>tbody>tr>td:nth-child(14) {
     width: 130px;
     /* background-color: rgb(131, 236, 213); */
 }
 
-.extDevTable>thead>tr>th:nth-child(15),
-.extDevTable>tbody>tr>td:nth-child(15) {
+.extDevLogTable>thead>tr>th:nth-child(15),
+.extDevLogTable>tbody>tr>td:nth-child(15) {
     width: 50px;
     /* background-color: rgb(217, 236, 131); */
 }
 
-.extDevTable>thead>tr>th:nth-child(16),
-.extDevTable>tbody>tr>td:nth-child(16) {
+.extDevLogTable>thead>tr>th:nth-child(16),
+.extDevLogTable>tbody>tr>td:nth-child(16) {
     width: 110px;
     /* background-color: rgb(255, 206, 206); */
 }
 
-.extDevTable>thead>tr>th:nth-child(17),
-.extDevTable>tbody>tr>td:nth-child(17) {
+.extDevLogTable>thead>tr>th:nth-child(17),
+.extDevLogTable>tbody>tr>td:nth-child(17) {
     width: 200px;
     /* background-color: rgb(99, 215, 111); */
     overflow: hidden;
@@ -259,29 +292,24 @@
     text-overflow: ellipsis;
 }
 
-.extDevTable>thead>tr>th:nth-child(18),
-.extDevTable>tbody>tr>td:nth-child(18) {
+.extDevLogTable>thead>tr>th:nth-child(18),
+.extDevLogTable>tbody>tr>td:nth-child(18) {
     width: 60px;
     /* background-color: rgb(255, 126, 80); */
 }
 
-.extDevTable>thead>tr>th:nth-child(19),
-.extDevTable>tbody>tr>td:nth-child(19) {
+.extDevLogTable>thead>tr>th:nth-child(19),
+.extDevLogTable>tbody>tr>td:nth-child(19) {
     width: 17px;
     /* background-color: rgb(204, 182, 255); */
 }
 
 /* [테이블 row :hover 효과]================================================================== */
-.extDevTable>tbody>.extDevTableTr:hover td {
+.extDevLogTable>tbody>.extDevLogTableTr:hover td {
     background-color: #e6ebff;
 }
 
-.extDevTable th,
-.extDevTable td {
-    word-break: keep-all;
-    border: 1px solid #333;
-    padding: 4px 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.extDevLogTable>thead>tr>th:nth-child(n),
+.extDevLogTable>tbody>tr>td:nth-child(n) {
+    width: auto;
 }

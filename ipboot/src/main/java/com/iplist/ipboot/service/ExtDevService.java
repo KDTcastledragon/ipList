@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.iplist.ipboot.domain.ExtDevDTO;
+import com.iplist.ipboot.domain.ExtDevLogHistDTO;
 
 public interface ExtDevService {
 
@@ -17,7 +18,9 @@ public interface ExtDevService {
 
 	void modifyExtDev2(Map<String, Object> data);
 
-	List<ExtDevDTO> allLogs();
+	List<ExtDevLogHistDTO> allLogs();
+
+	List<ExtDevLogHistDTO> logsByWord(String logWord);
 
 	//	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes);
 }

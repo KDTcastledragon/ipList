@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iplist.ipboot.domain.ExtDevDTO;
+import com.iplist.ipboot.domain.ExtDevLogHistDTO;
 import com.iplist.ipboot.mapper.ExtDevMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -62,9 +63,15 @@ public class ExtDevServiceImpl implements ExtDevService {
 	}
 
 	@Override
-	public List<ExtDevDTO> allLogs() {
-		List<ExtDevDTO> list = extmapper.allLogs();
+	public List<ExtDevLogHistDTO> allLogs() {
+		List<ExtDevLogHistDTO> list = extmapper.allLogs();
 		return list;
+	}
+
+	@Override
+	public List<ExtDevLogHistDTO> logsByWord(String logWord) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	//	@Override

@@ -275,13 +275,3 @@
 .extDevTable>tbody>.extDevTableTr:hover td {
     background-color: #e6ebff;
 }
-
-.extDevTable th,
-.extDevTable td {
-    word-break: keep-all;
-    border: 1px solid #333;
-    padding: 4px 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}

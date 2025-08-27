@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.iplist.ipboot.domain.ExtDevDTO;
+import com.iplist.ipboot.domain.ExtDevLogHistDTO;
 
 @Mapper
 public interface ExtDevMapper {
@@ -20,6 +21,6 @@ public interface ExtDevMapper {
 
 	void modifyExtDev2(Map<String, Object> data);
 
-	List<ExtDevDTO> allLogs();
+	List<ExtDevLogHistDTO> allLogs();
 
 }
