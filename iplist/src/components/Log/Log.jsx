@@ -119,18 +119,17 @@ function Log() {
                                 <td>{d.emp_id === null ? '-' : d.emp_id}</td>
                                 <td>{d.emp_name}</td>
                                 <td>{d.dept_name}</td>
+                                <td>{d.location}</td>
+                                <td>{d.valid_date}</td>
+                                <td>{d.usage_purpose}</td>
                                 <td>{d.cmd_model}</td>
                                 <td>{d.cmd_serial_num}</td>
                                 <td>{d.dlp_model}</td>
                                 <td>{d.dlp_serial_num}</td>
-                                <td>{d.valid_date}</td>
-                                <td>{d.usage_purpose}</td>
-                                <td>{d.location}</td>
                                 <td>{d.capacity === null ? '-' : d.capacity}</td>
                                 <td>{d.manufacturer}</td>
                                 <td>{d.notes}</td>
                                 <td>{d.log_timestamp}</td>
-
                             </tr>
 
                         )))

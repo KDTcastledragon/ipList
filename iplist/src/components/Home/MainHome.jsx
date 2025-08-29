@@ -9,7 +9,7 @@ function MainHome() {
             <div>
                 <Header />
             </div>
-            <div>
+            <div className='RouteBodyContainer'>
                 <RouteBody />
             </div>
         </>

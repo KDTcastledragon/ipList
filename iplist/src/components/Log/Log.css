@@ -1,8 +1,7 @@
 .ExtDevLogContainer {
     margin: 10px auto;
-    /* max-width: 5000px; */
     overflow-x: auto;
-    /* 가로 스크롤 허용 */
+    /* background-color: aquamarine; */
 }
 
 /* =======================[검색추가박스]======================================================= */
@@ -84,7 +83,7 @@
 /* [스크롤 설정]================================================================================ */
 .extDevLogTable {
     /* width: max-content; */
-    height: 500px;
+    height: 450px;
     margin: 10px auto;
     border: 1px solid black;
     text-align: center;
