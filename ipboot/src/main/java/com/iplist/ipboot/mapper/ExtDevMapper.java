@@ -26,4 +26,6 @@ public interface ExtDevMapper {
 
 	List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord);
 
+	List<ExtDevDTO> searchExtDev(String word, String devType);
+
 }

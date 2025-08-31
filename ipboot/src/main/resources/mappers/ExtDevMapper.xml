@@ -9,27 +9,12 @@
 		resultType="com.iplist.ipboot.domain.ExtDevDTO">
 		select * from ext_dev;
 	</select>
-
-	<select id="searchWord" parameterType="String"
-		resultType="com.iplist.ipboot.domain.ExtDevDTO">
-		select * from ext_dev
-		WHERE dev_id LIKE CONCAT('%',
-		#{enteredWord}, '%')
-		OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
-		OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
-		OR dept_name LIKE
-		CONCAT('%', #{enteredWord}, '%')
-		OR cmd_model LIKE CONCAT('%',
-		#{enteredWord}, '%')
-		OR cmd_serial_num LIKE CONCAT('%', #{enteredWord},
-		'%')
-		OR dlp_model LIKE CONCAT('%', #{enteredWord}, '%')
-		OR
-		dlp_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
-		OR usage_purpose
-		LIKE CONCAT('%', #{enteredWord}, '%')
-		OR location LIKE CONCAT('%',
-		#{enteredWord}, '%');
+	
+	<select id="searchExtDev" resultType="com.iplist.ipboot.domain.ExtDevDTO">
+	call search_ext_dev(
+	#{word , jdbcType=VARCHAR, mode=IN},
+	#{devType, jdbcType=VARCHAR, mode=IN}
+	);
 	</select>
 
 	<update id="addExtDev" parameterType="map">
@@ -99,6 +84,28 @@
 		   #{logWord, jdbcType=VARCHAR, mode=IN}
 		);
 	</select>
+	
+	<!-- <select id="searchWord" parameterType="String"
+		resultType="com.iplist.ipboot.domain.ExtDevDTO">
+		select * from ext_dev
+		WHERE dev_id LIKE CONCAT('%',
+		#{enteredWord}, '%')
+		OR dev_type LIKE CONCAT('%', #{enteredWord}, '%')
+		OR emp_name LIKE CONCAT('%', #{enteredWord}, '%')
+		OR dept_name LIKE
+		CONCAT('%', #{enteredWord}, '%')
+		OR cmd_model LIKE CONCAT('%',
+		#{enteredWord}, '%')
+		OR cmd_serial_num LIKE CONCAT('%', #{enteredWord},
+		'%')
+		OR dlp_model LIKE CONCAT('%', #{enteredWord}, '%')
+		OR
+		dlp_serial_num LIKE CONCAT('%', #{enteredWord}, '%')
+		OR usage_purpose
+		LIKE CONCAT('%', #{enteredWord}, '%')
+		OR location LIKE CONCAT('%',
+		#{enteredWord}, '%');
+	</select> -->
 
 
 </mapper>

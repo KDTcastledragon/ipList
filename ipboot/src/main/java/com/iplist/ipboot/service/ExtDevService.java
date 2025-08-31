@@ -22,4 +22,6 @@ public interface ExtDevService {
 	List<ExtDevLogHistDTO> allLogs();
 
 	List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord);
+
+	List<ExtDevDTO> searchExtDev(String word, String devType);
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iplist.ipboot.domain.ExtDevDTO;
@@ -44,13 +43,21 @@ public class ExtDevController {
 		}
 	}
 
-	@GetMapping("/searchWord")
-	public ResponseEntity<?> searchWord(@RequestParam(value = "word", required = false) String enteredWord) {
-		log.info("검색어 확인 : " + enteredWord);
-		List<ExtDevDTO> searchedList = extservice.searchWord(enteredWord);
-		log.info("");
+	@PostMapping("/searchExtDev")
+	public ResponseEntity<?> searchExtDev(@RequestBody Map<String, Object> data) {
+		try {
 
-		return ResponseEntity.ok().body(searchedList);
+			log.info("검색어 확인 : " + data);
+			String word = (String) data.get("word");
+			String devType = (String) data.get("devType");
+
+			List<ExtDevDTO> searchedList = extservice.searchExtDev(word, devType);
+			log.info("");
+
+			return ResponseEntity.ok().body(searchedList);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@PostMapping("/addExtDev")

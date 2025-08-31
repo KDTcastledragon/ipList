@@ -75,6 +75,12 @@ public class ExtDevServiceImpl implements ExtDevService {
 		return list;
 	}
 
+	@Override
+	public List<ExtDevDTO> searchExtDev(String word, String devType) {
+		List<ExtDevDTO> list = extmapper.searchExtDev(word, devType);
+		return list;
+	}
+
 	//	@Override
 	//	public void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes) {
 	//

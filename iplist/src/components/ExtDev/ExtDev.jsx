@@ -50,9 +50,13 @@ function ExtDev() {
         setSelectedAssetsData(data);
     }
 
-    function searchWord() {
+    function searchExtDev() {
+        const data = {
+            word: enteredWord,
+            devType: selectedOpt
+        }
         axios
-            .get(`/extDev/searchWord?word=${enteredWord}`)
+            .post(`/extDev/searchExtDev`, data)
             .then((r) => {
                 setExtDevData(r.data);
             }).catch((e) => {
@@ -60,95 +64,87 @@ function ExtDev() {
             })
     }
 
-    function optSearch() {
-        axios
-            .get(`/extDev/searchWord?word=${selectedOpt}`)
-            .then((r) => {
-                setExtDevData(r.data);
-            }).catch((e) => {
-                alert(`실패.`);
-            })
+    const resetSearch = () => {
+        setEnteredWord('');
+        setSelectedOpt('');
     }
 
+    // ==========================================================================================================================
     return (
         <div className='ExtDevContainer'>
             <div className='searchAddBox'>
-                <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
-                <button onClick={() => searchWord(enteredWord)}>검색</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select
-                    value={selectedOpt}
-                    onChange={(e) => {
-                        setSelectedOpt(e.target.value);
-                        // optSearch(e.target.value);
-                    }}
-                >
+                <select value={selectedOpt} onChange={(e) => { setSelectedOpt(e.target.value); }}>
+                    <option value="">전체</option>
                     <option value="USB">USB</option>
                     <option value="카드리더기">카드리더기</option>
                     <option value="외장하드">외장하드</option>
                 </select>
-                <button onClick={() => optSearch(selectedOpt)}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
+                <button onClick={() => searchExtDev(enteredWord)}>검색</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button onClick={() => setAddModalWindow(true)}>신규장비 등록</button>
+                <button onClick={() => resetSearch()}>초기화</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-            <table className='extDevTable'>
-                <tbody>
-                    <tr>
-                        <td>관리번호</td>
-                        <td>장비종류</td>
-                        <td>DLP등록</td>
-                        <td>DLP통제</td>
-                        <td>사용구분</td>
-                        <td>사번</td>
-                        <td>사용자</td>
-                        <td>부서</td>
-                        <td>위치</td>
-                        <td>허용만료일</td>
-                        <td>사용목적</td>
-                        <td>모델(CMD)</td>
-                        <td>시리얼(CMD)</td>
-                        <td>모델(DLP)</td>
-                        <td>시리얼(DLP)</td>
-                        <td>용량</td>
-                        <td>제조사</td>
-                        <td>비고</td>
-                        <td>변경</td>
-                    </tr>
-                    {extDevData && extDevData.length > 0 ?
-                        (extDevData.map((d, i) => (
-                            <tr key={i} className='extDevTableTr'>
-                                <td>{d.dev_id}</td>
-                                <td>
-                                    <span onClick={() => modifyAssets(d)}>{d.dev_type}</span>
-                                </td>
-                                <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
-                                <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
-                                <td>{d.dev_status}</td>
-                                <td>{d.emp_id === null ? '-' : d.emp_id}</td>
-                                <td>{d.emp_name}</td>
-                                <td>{d.dept_name}</td>
-                                <td>{d.location}</td>
-                                <td>{d.valid_date}</td>
-                                <td>{d.usage_purpose}</td>
-                                <td>{d.cmd_model}</td>
-                                <td>{d.cmd_serial_num}</td>
-                                <td>{d.dlp_model}</td>
-                                <td>{d.dlp_serial_num}</td>
-                                <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
-                                <td>{d.manufacturer}</td>
-                                <td>{d.notes}</td>
-                                <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
-                            </tr>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        )))
-                        :
-                        <div>데이터 없음</div>
-                    }
-                </tbody>
-            </table>
+                <button className='addExtDevButton' onClick={() => setAddModalWindow(true)}>신규장비 등록</button>
+            </div>
+            <div className='extDevTableSection'>
+                <table className='extDevTable'>
+                    <tbody>
+                        <tr>
+                            <td>관리번호</td>
+                            <td>장비종류</td>
+                            <td>DLP등록</td>
+                            <td>DLP통제</td>
+                            <td>사용구분</td>
+                            <td>사번</td>
+                            <td>사용자</td>
+                            <td>부서</td>
+                            <td>위치</td>
+                            <td>허용만료일</td>
+                            <td>사용목적</td>
+                            <td>모델(CMD)</td>
+                            <td>시리얼(CMD)</td>
+                            <td>모델(DLP)</td>
+                            <td>시리얼(DLP)</td>
+                            <td>용량</td>
+                            <td>제조사</td>
+                            <td>비고</td>
+                            <td>변경</td>
+                        </tr>
+                        {extDevData && extDevData.length > 0 ?
+                            (extDevData.map((d, i) => (
+                                <tr key={i} className='extDevTableTr'>
+                                    <td>{d.dev_id}</td>
+                                    <td onClick={() => modifyAssets(d)}>{d.dev_type}</td>
+                                    <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
+                                    <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
+                                    <td>{d.dev_status}</td>
+                                    <td>{d.emp_id === null ? '-' : d.emp_id}</td>
+                                    <td>{d.emp_name}</td>
+                                    <td>{d.dept_name}</td>
+                                    <td>{d.location}</td>
+                                    <td>{d.valid_date}</td>
+                                    <td>{d.usage_purpose}</td>
+                                    <td>{d.cmd_model}</td>
+                                    <td>{d.cmd_serial_num}</td>
+                                    <td>{d.dlp_model}</td>
+                                    <td>{d.dlp_serial_num}</td>
+                                    <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
+                                    <td>{d.manufacturer}</td>
+                                    <td>{d.notes}</td>
+                                    <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
+                                </tr>
+
+                            )))
+                            :
+                            <td className='noDataInDB' colSpan={19}>데이터 없음</td>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
 
             {modifyWindow && (

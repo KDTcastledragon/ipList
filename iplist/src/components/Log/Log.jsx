@@ -89,11 +89,20 @@ function Log() {
             })
     }
 
+    const resetSearch = () => {
+        setStartDate('');
+        setEndDate('');
+        setSelectedOpt('');
+        setEnteredWord('');
+    }
+
     //=============================================================================================================
     return (
         <div className='ExtDevLogContainer'>
             <div className='searchAddBox'>
-                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                <input type="date" value={startDate} onChange={(e) =>
+                    setStartDate(e.target.value)}
+                />
                 &nbsp;&nbsp;&nbsp;&nbsp;<span>~</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,70 +117,75 @@ function Log() {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
                 <button onClick={() => selectLogs(enteredWord)}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => resetSearch()}>초기화</button>
             </div>
-            <table className='extDevLogTable'>
-                <tbody>
-                    <tr className='extDevLogTableTrThead'>
-                        <td>구분</td>
-                        <td>관리번호</td>
-                        <td>장비종류</td>
-                        <td>DLP등록</td>
-                        <td>DLP통제</td>
-                        <td>사용구분</td>
-                        <td>사번</td>
-                        <td>사용자</td>
-                        <td>부서</td>
-                        <td>위치</td>
-                        <td>허용만료일</td>
-                        <td>사용목적</td>
-                        <td>모델(CMD)</td>
-                        <td>시리얼(CMD)</td>
-                        <td>모델(DLP)</td>
-                        <td>시리얼(DLP)</td>
-                        <td>용량</td>
-                        <td>제조사</td>
-                        <td>비고</td>
-                        <td>관리자</td>
-                        <td>관리일자</td>
-                    </tr>
-                    {logData && logData.length > 0 ?
-                        (logData.map((d, i) => (
-                            <tr key={i} className='extDevLogTableTr'>
-                                <td>{d.log_type}</td>
-                                <td>{d.dev_id}</td>
-                                <td>{d.dev_type}</td>
-                                <td>{d.registered_dlp}</td>
-                                <td>{d.controlled_dlp}</td>
-                                <td>{d.dev_status}</td>
-                                <td>{d.emp_id ? d.emp_id : '-'}</td>
-                                <td>{d.emp_name}</td>
-                                <td>{d.dept_name}</td>
-                                <td>{d.location}</td>
-                                <td>{d.valid_date}</td>
-                                <td title={d.usage_purpose}>{fmatPurAndNote(d.usage_purpose)}</td>
-                                {/* <td>
+            <div className='extDevLogTableSection'>
+                <table className='extDevLogTable'>
+                    <tbody>
+                        <tr className='extDevLogTableTrThead'>
+                            <td>구분</td>
+                            <td>관리번호</td>
+                            <td>장비종류</td>
+                            <td>DLP등록</td>
+                            <td>DLP통제</td>
+                            <td>사용구분</td>
+                            <td>사번</td>
+                            <td>사용자</td>
+                            <td>부서</td>
+                            <td>위치</td>
+                            <td>허용만료일</td>
+                            <td>사용목적</td>
+                            <td>모델(CMD)</td>
+                            <td>시리얼(CMD)</td>
+                            <td>모델(DLP)</td>
+                            <td>시리얼(DLP)</td>
+                            <td>용량</td>
+                            <td>제조사</td>
+                            <td>비고</td>
+                            <td>관리자</td>
+                            <td>관리일자</td>
+                        </tr>
+                        {logData && logData.length > 0 ?
+                            (logData.map((d, i) => (
+                                <tr key={i} className='extDevLogTableTr'>
+                                    <td>{d.log_type}</td>
+                                    <td>{d.dev_id}</td>
+                                    <td>{d.dev_type}</td>
+                                    <td>{d.registered_dlp}</td>
+                                    <td>{d.controlled_dlp}</td>
+                                    <td>{d.dev_status}</td>
+                                    <td>{d.emp_id ? d.emp_id : '-'}</td>
+                                    <td>{d.emp_name}</td>
+                                    <td>{d.dept_name}</td>
+                                    <td>{d.location}</td>
+                                    <td>{d.valid_date}</td>
+                                    <td title={d.usage_purpose}>{fmatPurAndNote(d.usage_purpose)}</td>
+                                    {/* <td>
                                     {fmatPurAndNote(d.usage_purpose)}
-                                </td> */}
-                                <td>{d.cmd_model}</td>
-                                <td>{d.cmd_serial_num}</td>
-                                <td>{d.dlp_model}</td>
-                                <td>{d.dlp_serial_num}</td>
-                                <td>{d.capacity === null ? '-' : d.capacity}</td>
-                                <td>{d.manufacturer}</td>
-                                <td title={d.notes}>{fmatPurAndNote(d.notes)}</td>
-                                {/* <td>
+                                    </td> */}
+                                    <td>{d.cmd_model}</td>
+                                    <td>{d.cmd_serial_num}</td>
+                                    <td>{d.dlp_model}</td>
+                                    <td>{d.dlp_serial_num}</td>
+                                    <td>{d.capacity === null ? '-' : d.capacity}</td>
+                                    <td>{d.manufacturer}</td>
+                                    <td title={d.notes}>{fmatPurAndNote(d.notes)}</td>
+                                    {/* <td>
                                     {fmatPurAndNote(d.notes)}
-                                </td> */}
-                                <td>{d.admin_id}</td>
-                                <td>{d.log_timestamp === null ? '-' : fmatTs(d.log_timestamp)}</td>
-                            </tr>
+                                    </td> */}
+                                    <td>{d.admin_id}</td>
+                                    <td>{d.log_timestamp === null ? '-' : fmatTs(d.log_timestamp)}</td>
+                                </tr>
 
-                        )))
-                        :
-                        <div>데이터 없음</div>
-                    }
-                </tbody>
-            </table>
+                            )))
+                            :
+                            <td className='noDataInDB' colSpan={21}>데이터 없음</td>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
