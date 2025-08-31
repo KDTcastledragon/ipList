@@ -1,127 +1,22 @@
 .ExtDevLogContainer {
-    margin: 10px auto;
+    /* margin: 10px auto; */
     overflow-x: auto;
-    /* background-color: aquamarine; */
-}
-
-/* =======================[검색추가박스]======================================================= */
-.searchAddBox {
-    width: 1000px;
-    height: 30px;
-    margin: 30px auto;
-    margin-top: 30px;
-    /* background-color: rgb(225, 255, 179); */
-    display: flex;
-    align-items: center;
-}
-
-.searchAddBox>input {
-    display: inline-block;
-    width: 200px;
-    height: 24px;
-}
-
-.searchAddBox>button:nth-of-type(1) {
-    display: inline-block;
-    width: 70px;
-    height: 30px;
-    background-color: black;
-    font-weight: bold;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-.searchAddBox>button:nth-of-type(1):hover {
-    background-color: rgb(68, 68, 68);
-    cursor: pointer;
-}
-
-.searchAddBox>button:nth-of-type(2) {
-    display: inline-block;
-    width: 70px;
-    height: 30px;
-    background-color: rgb(20, 20, 20);
-    font-weight: bold;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-.searchAddBox>button:nth-of-type(2):hover {
-    background-color: rgb(63, 63, 63);
-    cursor: pointer;
-}
-
-.searchAddBox>select:nth-of-type(1) {
-    display: inline-block;
-    width: 110px;
-    height: 30px;
-    background-color: rgb(212, 212, 212);
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-}
-
-.searchAddBox>button:nth-of-type(3) {
-    display: inline-block;
-    width: 110px;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    background-color: rgb(75, 159, 255);
-}
-
-.searchAddBox>button:nth-of-type(3):hover {
-    background-color: rgb(0, 104, 223);
-    color: white;
-    cursor: pointer;
+    overflow-y: scroll;
 }
 
 
-/* [스크롤 설정]================================================================================ */
 .extDevLogTable {
-    /* width: max-content; */
-    height: 450px;
-    margin: 10px auto;
+    /* height: 455px; */
     border: 1px solid black;
     text-align: center;
     border-collapse: collapse;
     padding: 0;
     font-size: 11px;
-    table-layout: auto;
-}
-
-.ExtDevLogContainer>table>tbody {
-    display: block;
-    max-height: 460px;
-    overflow-y: scroll;
-}
-
-.ExtDevLogContainer>table>thead {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    font-size: 12px;
-}
-
-.ExtDevLogContainer>table>tbody {
-    display: block;
-    max-height: 460px;
-    overflow-y: scroll;
-    table-layout: fixed;
-}
-
-.ExtDevContainer>table>thead,
-.ExtDevContainer>table>tbody>tr {
-    display: table;
-    width: 100%;
-    table-layout: auto;
 }
 
 .extDevLogTable th,
 .extDevLogTable td {
+    table-layout: auto;
     word-break: keep-all;
     border: 1px solid #333;
     padding: 4px 6px;
@@ -130,66 +25,49 @@
     text-overflow: ellipsis;
 }
 
-.ExtDevLogContainer>table>tbody>tr>td,
-.ExtDevLogContainer>table>thead>tr>th {
-    border-left: 1px solid rgb(47, 47, 47);
-}
-
-.ExtDevLogContainer>table>thead {
-    width: calc(100% - 15px);
-    background-color: rgb(127, 127, 127);
-}
-
-.ExtDevLogContainer>table>thead>tr>th {
+.extDevLogTable>tbody>tr:first-child>td {
+    background-color: rgb(182, 182, 182);
+    font-size: 14px;
     font-weight: bold;
 }
 
-.ExtDevLogContainer>table>thead>tr>th,
-.ExtDevLogContainer>table>tbody>tr>td {
-    border-bottom: 1px solid black;
+
+.extDevLogTable>tbody>tr>td {
+    height: 11px;
+    line-height: 11px;
 }
 
-/** ======[테이블 변경 버튼] */
-.extDevLogTable>tbody>tr>td:nth-child(2)>span:hover {
-    font-size: 110%;
-    font-weight: bold;
-    text-decoration: underline;
+.extDevLogTableTr:hover td {
+    background-color: rgba(222, 255, 182, 0.751);
+}
+
+/* 
+.upTooltip,
+.nTooltip {
+    position: relative;
     cursor: pointer;
 }
 
-/** ==============[사용자/부서 - 강조 효과]========================= */
-.extDevLogTable>tbody>tr>td:nth-child(6),
-.extDevLogTable>tbody>tr>td:nth-child(7) {
-    background-color: rgb(243, 212, 37);
+.upTooltip .tooltiptext,
+.nTooltip .tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    max-width: 300px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 5px 10px;
+    border-radius: 4px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: pre-wrap;
 }
 
-
-
-/** ==================== [테이블 column 넓이]================================================================== */
-
-
-.extDevLogTable>thead>tr>th:nth-child(1),
-.extDevLogTable>tbody>tr>td:nth-child(1) {
-    height: 10px;
-    line-height: 10px;
-    /* background-color: rgb(255, 161, 161); */
-}
-
-.extDevLogTable>thead>tr>th:nth-child(17),
-.extDevLogTable>tbody>tr>td:nth-child(17) {
-    width: 200px;
-    /* background-color: rgb(99, 215, 111); */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-/* [테이블 row :hover 효과]================================================================== */
-.extDevLogTable>tbody>.extDevLogTableTr:hover td {
-    background-color: #e6ebff;
-}
-
-.extDevLogTable>thead>tr>th:nth-child(n),
-.extDevLogTable>tbody>tr>td:nth-child(n) {
-    width: auto;
-}
+.upTooltip:hover .tooltiptext,
+.nTooltip:hover .tooltiptext {
+    visibility: visible;
+} */

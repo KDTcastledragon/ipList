@@ -1,5 +1,7 @@
 package com.iplist.ipboot.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -77,17 +79,37 @@ public class ExtDevController {
 		}
 	}
 
-	@GetMapping("/selectLogs")
-	public ResponseEntity<?> selectLogs(@RequestParam(value = "logWord", required = false) String logWord) {
+	@GetMapping("/allLogs")
+	public ResponseEntity<?> allLogs() {
+		List<ExtDevLogHistDTO> list = extservice.allLogs();
+
+		return ResponseEntity.ok(list);
+	}
+
+	@PostMapping("/selectLogs")
+	public ResponseEntity<?> selectLogs(@RequestBody Map<String, Object> data) {
 		try {
-			log.info("selectLogs : " + logWord);
-			if (logWord == null) {
+			log.info("selectLogs : " + data);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			String startDateStr = (String) data.get("startDate");
+			String endDateStr = (String) data.get("endDate");
+
+			LocalDate startDate = startDateStr != null ? LocalDate.parse(startDateStr, formatter) : null;
+			LocalDate endDate = endDateStr != null ? LocalDate.parse(endDateStr, formatter) : null;
+
+			String selectedOpt = (String) data.get("selectedOpt");
+			String logWord = (String) data.get("logWord");
+
+			if (logWord == null && startDate == null && endDate == null && selectedOpt == null) {
 				List<ExtDevLogHistDTO> logList = extservice.allLogs();
 				log.info("logList : " + logList);
 				return ResponseEntity.ok(logList);
+
 			} else {
-				List<ExtDevLogHistDTO> logList = extservice.logsByWord(logWord);
+				List<ExtDevLogHistDTO> logList = extservice.filteredLogs(startDate, endDate, selectedOpt, logWord);
 				return ResponseEntity.ok(logList);
+
 			}
 		} catch (Exception e) {
 			throw e;

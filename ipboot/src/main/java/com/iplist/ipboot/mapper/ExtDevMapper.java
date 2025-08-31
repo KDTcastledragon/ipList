@@ -1,5 +1,6 @@
 package com.iplist.ipboot.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +23,7 @@ public interface ExtDevMapper {
 	void modifyExtDev2(Map<String, Object> data);
 
 	List<ExtDevLogHistDTO> allLogs();
+
+	List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord);
 
 }

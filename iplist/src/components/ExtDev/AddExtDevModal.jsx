@@ -40,7 +40,8 @@ function AddExtDevModal({ setAddModalWindow }) {
     const [location, setLocation] = useState();
     const [validDate, setValidDate] = useState();
     const [notes, setNotes] = useState();
-    const [devStatus, setDevStatus] = useState('storage');
+    const [devStatus, setDevStatus] = useState('보관');
+    const administratorId = sessionStorage.getItem('adminId');
 
     function addExtDev() {
         const extDevData = {
@@ -48,21 +49,22 @@ function AddExtDevModal({ setAddModalWindow }) {
             devType: devType,
             registeredDlp: registeredDlp === 'true' ? 1 : 0,
             controlledDlp: controlledDlp === 'true' ? 1 : 0,
+            devStatus: devStatus,
             empId: empId,
             empName: empName,
             deptId: deptId,
             deptName: deptName,
+            location: location,
+            validDate: validDate,
+            usagePurpose: usagePurpose,
             cmdModel: cmdModel,
             cmdSerialNum: cmdSerialNum,
             dlpModel: dlpModel,
             dlpSerialNum: dlpSerialNum,
             capacity: capacity,
             manufacturer: manufacturer,
-            usagePurpose: usagePurpose,
-            location: location,
-            validDate: validDate,
             notes: notes,
-            devStatus: devStatus
+            adminId: administratorId
         };
 
         axios
@@ -82,7 +84,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                 <div className='closeExtDevModalBox' >
                     <button onClick={() => setAddModalWindow(false)}>X</button>
                 </div>
-                <div className='addExtDevTitle'><span>신규장비 등록</span></div>
+                <div className='extDevModalTitle'><span>신규장비 등록</span></div>
                 <div className='insertExtDevData'>
                     <div className='insertDataLeft'>
                         <div className='devId'>
@@ -147,11 +149,11 @@ function AddExtDevModal({ setAddModalWindow }) {
                         </div>
                         <div>
                             <span>사용상태 : </span>
-                            <select defaultValue={"storage"} value={devStatus} onChange={(e) => {
+                            <select value={devStatus} onChange={(e) => {
                                 setDevStatus(e.target.value)
                             }}>
-                                <option value='using'>사용중</option>
-                                <option value='storage'>보관</option>
+                                <option value='사용중'>사용중</option>
+                                <option value='보관'>보관</option>
                             </select>
                         </div>
                         <div>

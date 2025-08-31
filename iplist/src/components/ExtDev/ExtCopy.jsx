@@ -6,7 +6,7 @@ import AddExtDevModal from './AddExtDevModal';
 import { useEffect, useState } from 'react';
 
 
-function ExtDev() {
+function ExtCopy() {
     const [enteredWord, setEnteredWord] = useState('');
     const [selectedOpt, setSelectedOpt] = useState('');
     const [extDevData, setExtDevData] = useState([]);
@@ -95,28 +95,31 @@ function ExtDev() {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <table className='extDevTable'>
-                <tbody>
+                <thead>
                     <tr>
-                        <td>관리번호</td>
-                        <td>장비종류</td>
-                        <td>DLP등록</td>
-                        <td>DLP통제</td>
-                        <td>사용구분</td>
-                        <td>사번</td>
-                        <td>사용자</td>
-                        <td>부서</td>
-                        <td>위치</td>
-                        <td>허용만료일</td>
-                        <td>사용목적</td>
-                        <td>모델(CMD)</td>
-                        <td>시리얼(CMD)</td>
-                        <td>모델(DLP)</td>
-                        <td>시리얼(DLP)</td>
-                        <td>용량</td>
-                        <td>제조사</td>
-                        <td>비고</td>
-                        <td>변경</td>
+                        <th>관리번호</th>
+                        <th>장비종류</th>
+                        <th>DLP등록</th>
+                        <th>DLP통제</th>
+                        <th>사번</th>
+                        <th>사용자</th>
+                        <th>부서</th>
+                        <th>모델(CMD)</th>
+                        <th>시리얼(CMD)</th>
+                        <th>모델(DLP)</th>
+                        <th>시리얼(DLP)</th>
+                        <th>허용만료일</th>
+                        <th>사용목적</th>
+                        <th>위치</th>
+                        <th>용량</th>
+                        <th>제조사</th>
+                        <th>사용여부</th>
+                        <th>비고</th>
+                        <th>변경</th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody>
                     {extDevData && extDevData.length > 0 ?
                         (extDevData.map((d, i) => (
                             <tr key={i} className='extDevTableTr'>
@@ -126,19 +129,19 @@ function ExtDev() {
                                 </td>
                                 <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
                                 <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
-                                <td>{d.dev_status}</td>
                                 <td>{d.emp_id === null ? '-' : d.emp_id}</td>
                                 <td>{d.emp_name}</td>
                                 <td>{d.dept_name}</td>
-                                <td>{d.location}</td>
-                                <td>{d.valid_date}</td>
-                                <td>{d.usage_purpose}</td>
                                 <td>{d.cmd_model}</td>
                                 <td>{d.cmd_serial_num}</td>
                                 <td>{d.dlp_model}</td>
                                 <td>{d.dlp_serial_num}</td>
-                                <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
+                                <td>{d.valid_date}</td>
+                                <td>{d.usage_purpose}</td>
+                                <td>{d.location}</td>
+                                <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${d.capacity / 1024}TB` : `${d.capacity}GB`}</td>
                                 <td>{d.manufacturer}</td>
+                                <td>{d.dev_status}</td>
                                 <td>{d.notes}</td>
                                 <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
                             </tr>
@@ -168,4 +171,4 @@ function ExtDev() {
     );
 }
 
-export default ExtDev;
+export default ExtCopy;

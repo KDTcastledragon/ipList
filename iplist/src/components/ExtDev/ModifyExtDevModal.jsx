@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 
 function ModifyExtDevModal({ d, setModifyWindow }) {
 
+    const administratorId = sessionStorage.getItem('adminId');
+
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
     function handleEscKey(e) {
         if (e.key === 'Escape' && isModifying === false) {
@@ -57,38 +59,44 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
             devType: devType,
             registeredDlp: registeredDlp === 'true' ? 1 : 0,
             controlledDlp: controlledDlp === 'true' ? 1 : 0,
+            devStatus: devStatus,
             empId: empId,
             empName: empName,
             deptId: deptId,
             deptName: deptName,
+            location: location,
+            validDate: validDate,
+            usagePurpose: usagePurpose,
             cmdModel: cmdModel,
             cmdSerialNum: cmdSerialNum,
             dlpModel: dlpModel,
             dlpSerialNum: dlpSerialNum,
             capacity: capacity,
             manufacturer: manufacturer,
-            usagePurpose: usagePurpose,
-            location: location,
-            validDate: validDate,
-            devStatus: devStatus,
-            notes: notes
+            notes: notes,
+            adminId: administratorId
         }
 
         // =================[ modify Data만 추출하여 전송. Will be Refactoring...coming Soon.......... ]============
         const modifiedData = {};
 
-        if (devId !== d.dev_id) modifiedData.devId = devId;
         if (devType !== d.dev_type) modifiedData.devType = devType;
-        if (registeredDlp !== d.registered_dlp) modifiedData.registeredDlp = registeredDlp;
-        if (controlledDlp !== d.controlled_dlp) modifiedData.controlledDlp = controlledDlp;
+        if (registeredDlp !== d.registered_dlp) modifiedData.registeredDlp = registeredDlp === 'true' ? 1 : 0;
+        if (controlledDlp !== d.controlled_dlp) modifiedData.controlledDlp = controlledDlp === 'true' ? 1 : 0;
+        if (devStatus !== d.dev_status) modifiedData.devStatus = devStatus;
         if (empId !== d.emp_id) modifiedData.empId = empId;
         if (empName !== d.emp_name) modifiedData.empName = empName;
         if (deptId !== d.dept_id) modifiedData.deptId = deptId;
         if (deptName !== d.dept_name) modifiedData.deptName = deptName;
-        if (usagePurpose !== d.usage_purpose) modifiedData.usagePurpose = usagePurpose;
         if (location !== d.location) modifiedData.location = location;
         if (validDate !== d.valid_date) modifiedData.validDate = validDate;
-        if (devStatus !== d.dev_status) modifiedData.dev_status = devStatus;
+        if (usagePurpose !== d.usage_purpose) modifiedData.usagePurpose = usagePurpose;
+        if (cmdModel !== d.cmd_model) modifiedData.cmdModel = cmdModel;
+        if (cmdSerialNum !== d.cmd_serial_num) modifiedData.cmdSerialNum = cmdSerialNum;
+        if (dlpModel !== d.dlp_model) modifiedData.dlpModel = dlpModel;
+        if (dlpSerialNum !== d.dlp_serial_num) modifiedData.dlpSerialNum = dlpSerialNum;
+        if (capacity !== d.capacity) modifiedData.capacity = capacity;
+        if (manufacturer !== d.manufacturer) modifiedData.manufacturer = manufacturer;
         if (notes !== d.notes) modifiedData.notes = notes;
 
         if (Object.keys(modifiedData).length === 0) { // 수정된 내용없을 경우 알림창. (Object의 key만 배열로 반환.)
@@ -120,7 +128,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                 <div className='closeExtDevModalBox' >
                     <button onClick={() => setModifyWindow(false)}>X</button>
                 </div>
-                <div className='addExtDevTitle'>
+                <div className='extDevModalTitle'>
                     {isModifying === false ?
                         <span>장비 정보</span>
                         :
@@ -131,7 +139,8 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                     <div className={`insertDataLeft ${isModifying === true ? 'modDataLeft' : ''}`}>
                         <div className='devId'>
                             <span>관리번호 : </span>
-                            <input type="text" value={devId} onChange={(e) => setDevId(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={devId} readOnly />
+                            {/* <input type="text" value={devId} onChange={(e) => setDevId(e.target.value)} readOnly={!isModifying} /> */}
                         </div>
                         <div className='devType'>
                             <span>장비종류 : </span>
@@ -198,16 +207,16 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                                 if (!isModifying) {
                                     return
                                 };
-                                if (e.target.value === 'discarded') {
+                                if (e.target.value === '폐기') {
                                     alert(`폐기 처리합니다. 주의하세요.`);
                                     setDevStatus(e.target.value);
                                 } else {
                                     setDevStatus(e.target.value);
                                 }
                             }}>
-                                <option value='using'>사용중</option>
-                                <option value='storage'>보관</option>
-                                <option value='discarded'>폐기</option>
+                                <option value='사용중'>사용중</option>
+                                <option value='보관'>보관</option>
+                                <option value='폐기'>폐기</option>
                             </select>
                         </div>
                         <div>

@@ -1,5 +1,6 @@
 package com.iplist.ipboot.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,5 @@ public interface ExtDevService {
 
 	List<ExtDevLogHistDTO> allLogs();
 
-	List<ExtDevLogHistDTO> logsByWord(String logWord);
-
-	//	void addExtDev(String devId, String devType, boolean registeredDlp, boolean controlledDlp, String empId, String empName, String deptId, String deptName, String cmdModel, String cmdSerialNum, String dlpModel, String dlpSerialNum, Integer capacity, String manufacturer, String usagePurpose, String location, String validDate, String notes);
+	List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord);
 }

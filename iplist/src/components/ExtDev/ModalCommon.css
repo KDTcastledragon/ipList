@@ -46,14 +46,15 @@
 }
 
 /* ======[장비 추가 - 타이틀]============================================================= */
-.addExtDevTitle {
+.extDevModalTitle {
     width: 400px;
     height: 40px;
     line-height: 40px;
+    text-align: center;
     /* background-color: aquamarine; */
 }
 
-.addExtDevTitle>span {
+.extDevModalTitle>span {
     font-weight: bold;
     font-size: 30px;
 }

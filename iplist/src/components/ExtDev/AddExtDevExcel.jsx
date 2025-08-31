@@ -9,7 +9,10 @@ function AddExtDevExcel() {
     const [excelData, setExcelData] = useState([]);
     const [rows, setRows] = useState([]);
     const [columns, setColumns] = useState([]);
+    const administratorId = sessionStorage.getItem('adminId');
 
+
+    // ================================================================================
     const handleExcelFile = async (e) => {
         const file = e.target.files[0]
         const data = await file.arrayBuffer();

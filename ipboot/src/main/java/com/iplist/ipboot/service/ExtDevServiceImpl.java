@@ -1,5 +1,6 @@
 package com.iplist.ipboot.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +70,9 @@ public class ExtDevServiceImpl implements ExtDevService {
 	}
 
 	@Override
-	public List<ExtDevLogHistDTO> logsByWord(String logWord) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord) {
+		List<ExtDevLogHistDTO> list = extmapper.filteredLogs(startDate, endDate, selectedOpt, logWord);
+		return list;
 	}
 
 	//	@Override

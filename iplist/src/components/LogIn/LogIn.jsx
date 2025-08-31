@@ -26,6 +26,7 @@ function LogIn() {
             axios
                 .post(`/admin/login`, data)
                 .then((res) => {
+                    sessionStorage.setItem('adminId', res.data.admin_id);
                     sessionStorage.setItem('adminCode', res.data.admin_code);
                     sessionStorage.setItem('adminName', res.data.admin_name);
                     sessionStorage.setItem('page', 'ExtDev');

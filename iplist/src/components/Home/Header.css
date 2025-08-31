@@ -16,11 +16,13 @@
 
 .headerTitle {
     width: 300px;
+    text-align: center;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
+/** ===[관리자 정보]============= */
 .loginedAdmin {
     margin-left: auto;
     width: 250px;

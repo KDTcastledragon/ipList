@@ -43,7 +43,6 @@ function Header() {
             <div className='headerMenuButton'>
                 <div className={`${menu === 'ExtDev' ? 'selectedMenu' : 'menuDiv'}`}><button onClick={() => selectPage('ExtDev', '/ExtDev')}>외부장비</button></div>
                 <div className={`${menu === 'Log' ? 'selectedMenu' : 'menuDiv'}`}><button onClick={() => selectPage('Log', '/Log')}>로그</button></div>
-                <div className={`${menu === 'Log2' ? 'selectedMenu' : 'menuDiv'}`}><button onClick={() => selectPage('Log2', '/Log2')}>로그2</button></div>
                 {/* <div><button onClick={() => selectPage('Assets', '/Assets')}>자산</button></div> */}
                 {/* <div><button onClick={() => selectPage('IPList', '/IPList')}>IP목록</button></div> */}
                 {/* <div><button onClick={() => selectPage('UnauthSW', '/UnauthSW')}>미인가</button></div> */}
