@@ -13,16 +13,16 @@ function AddExtDevModal({ setAddModalWindow }) {
         }
     };
 
-    useEffect(() => {
-        window.addEventListener('keydown', handleEscKey);
+    // useEffect(() => {
+    //     window.addEventListener('keydown', handleEscKey);
 
-        return () => {
-            window.removeEventListener('keydown', handleEscKey);
-        };
+    //     return () => {
+    //         window.removeEventListener('keydown', handleEscKey);
+    //     };
 
-    }, []);
+    // }, []);
 
-    const [devId, setDevId] = useState();
+    const [devId, setDevId] = useState('');
     const [devType, setDevType] = useState('USB');
     const [registeredDlp, setRegisteredDlp] = useState('false');
     const [controlledDlp, setControlledDlp] = useState('false');
@@ -43,12 +43,45 @@ function AddExtDevModal({ setAddModalWindow }) {
     const [devStatus, setDevStatus] = useState('보관');
     const administratorId = sessionStorage.getItem('adminId');
 
+    const filterAlNum = /^[A-Za-z0-9]*$/;
+    const filterNum = /^[0-9]*$/;
+    // ==============================================================================================
+    function validateValue(event, filter, setFunc, upper = false) {
+        let value = event.target.value;
+
+        if (upper) {
+            value = value.toUpperCase();
+        }
+
+        if (filter.test(value)) {
+            setFunc(value);
+        } else {
+            alert(`목록에 맞는 값을 입력해주세요.`);
+            setFunc(null);
+            return;
+        }
+    }
+
+
+    // ==============================================================================================
     function addExtDev() {
+        if (!devId) {
+            alert(`관리번호는 반드시 입력해야합니다.`);
+            return;
+        }
+        const isUsing = [empId, empName, deptId, deptName, location].some(Boolean);
+
+        if (isUsing && devStatus !== '사용중') {
+            alert(`사용자 존재. [ 보관 ▶ 사용중 ] 변경합니다.`);
+            setDevStatus('사용중');
+            return;
+        }
+
         const extDevData = {
             devId: devId,
             devType: devType,
-            registeredDlp: registeredDlp === 'true' ? 1 : 0,
-            controlledDlp: controlledDlp === 'true' ? 1 : 0,
+            registeredDlp: registeredDlp === 'true' || 1 ? 1 : 0,
+            controlledDlp: controlledDlp === 'true' || 1 ? 1 : 0,
             devStatus: devStatus,
             empId: empId,
             empName: empName,
@@ -61,7 +94,7 @@ function AddExtDevModal({ setAddModalWindow }) {
             cmdSerialNum: cmdSerialNum,
             dlpModel: dlpModel,
             dlpSerialNum: dlpSerialNum,
-            capacity: capacity,
+            capacity: capacity === '' ? null : capacity,
             manufacturer: manufacturer,
             notes: notes,
             adminId: administratorId
@@ -71,7 +104,8 @@ function AddExtDevModal({ setAddModalWindow }) {
             .post(`/extDev/addExtDev`, extDevData)
             .then(() => {
                 alert('외부저장장치 등록 성공');
-                // setAddModalWindow(false); // 모달 닫기
+                window.location.reload();
+                setAddModalWindow(false); // 모달 닫기
             })
             .catch((e) => {
                 alert(`등록 실패: ${e.message}`);
@@ -89,7 +123,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                     <div className='insertDataLeft'>
                         <div className='devId'>
                             <span>관리번호 : </span>
-                            <input type="text" value={devId} onChange={(e) => setDevId(e.target.value)} />
+                            <input type="text" value={devId} onChange={(e) => validateValue(e, filterAlNum, setDevId, true)} />
                         </div>
                         <div className='devType'>
                             <span>장비종류 : </span>
@@ -107,10 +141,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                                     setControlledDlp('false');
                                 }
                                 setRegisteredDlp(e.target.value);
-                            }
-
-                            }
-                            >
+                            }}>
                                 <option value='true'>등록</option>
                                 <option value='false'>미등록</option>
                             </select>
@@ -133,7 +164,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                         </div>
                         <div>
                             <span>사번 : </span>
-                            <input type="text" value={empId} onChange={(e) => setEmpId(e.target.value)} />
+                            <input type="text" minLength={8} maxLength={8} value={empId} onChange={(e) => validateValue(e, filterNum, setEmpId)} />
                         </div>
                         <div>
                             <span>사용자 : </span>
@@ -165,19 +196,19 @@ function AddExtDevModal({ setAddModalWindow }) {
                     <div className='insertDataRight'>
                         <div>
                             <span>모델(CMD) : </span>
-                            <input type="text" value={cmdModel} onChange={(e) => setCmdModel(e.target.value)} />
+                            <input type="text" value={cmdModel} onChange={(e) => validateValue(e, filterAlNum, setCmdModel)} />
                         </div>
                         <div>
                             <span>시리얼(CMD) : </span>
-                            <input type="text" value={cmdSerialNum} onChange={(e) => setCmdSerialNum(e.target.value)} />
+                            <input type="text" value={cmdSerialNum} onChange={(e) => validateValue(e, filterAlNum, setCmdSerialNum)} />
                         </div>
                         <div>
                             <span>모델(DLP) : </span>
-                            <input type="text" value={dlpModel} onChange={(e) => setDlpModel(e.target.value)} />
+                            <input type="text" value={dlpModel} onChange={(e) => validateValue(e, filterAlNum, setDlpModel)} />
                         </div>
                         <div>
-                            <span>시리얼(CMD) : </span>
-                            <input type="text" value={dlpSerialNum} onChange={(e) => setDlpSerialNum(e.target.value)} />
+                            <span>시리얼(DLP) : </span>
+                            <input type="text" value={dlpSerialNum} onChange={(e) => validateValue(e, filterAlNum, setDlpSerialNum)} />
                         </div>
                         <div>
                             <span>허용만료일 : </span>
@@ -185,7 +216,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                         </div>
                         <div>
                             <span>용량 : </span>
-                            <input type="text" value={capacity} onChange={(e) => setCapacity(e.target.value)} />
+                            <input type="text" value={capacity} onChange={(e) => validateValue(e, filterNum, setCapacity)} />
                         </div>
                         <div>
                             <span>제조사 : </span>

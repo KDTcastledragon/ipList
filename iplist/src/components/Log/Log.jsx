@@ -70,6 +70,11 @@ function Log() {
         }
     }
 
+    const isNullHyphen = (data) => {
+        if (!data) { return `-`; }
+        else { return data }
+    }
+
 
     // ==========================================================================
     function selectLogs() {
@@ -156,19 +161,19 @@ function Log() {
                                     <td>{d.registered_dlp}</td>
                                     <td>{d.controlled_dlp}</td>
                                     <td>{d.dev_status}</td>
-                                    <td>{d.emp_id ? d.emp_id : '-'}</td>
-                                    <td>{d.emp_name}</td>
-                                    <td>{d.dept_name}</td>
-                                    <td>{d.location}</td>
-                                    <td>{d.valid_date}</td>
+                                    <td>{isNullHyphen(d.emp_id)}</td>
+                                    <td>{isNullHyphen(d.emp_name)}</td>
+                                    <td>{isNullHyphen(d.dept_name)}</td>
+                                    <td>{isNullHyphen(d.location)}</td>
+                                    <td>{isNullHyphen(d.valid_date)}</td>
                                     <td title={d.usage_purpose}>{fmatPurAndNote(d.usage_purpose)}</td>
                                     {/* <td>
                                     {fmatPurAndNote(d.usage_purpose)}
                                     </td> */}
-                                    <td>{d.cmd_model}</td>
-                                    <td>{d.cmd_serial_num}</td>
-                                    <td>{d.dlp_model}</td>
-                                    <td>{d.dlp_serial_num}</td>
+                                    <td>{isNullHyphen(d.cmd_model)}</td>
+                                    <td>{isNullHyphen(d.cmd_serial_num)}</td>
+                                    <td>{isNullHyphen(d.dlp_model)}</td>
+                                    <td>{isNullHyphen(d.dlp_serial_num)}</td>
                                     <td>{d.capacity === null ? '-' : d.capacity}</td>
                                     <td>{d.manufacturer}</td>
                                     <td title={d.notes}>{fmatPurAndNote(d.notes)}</td>

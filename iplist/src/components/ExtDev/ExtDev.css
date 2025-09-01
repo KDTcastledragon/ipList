@@ -118,7 +118,7 @@
 }
 
 .extDevTable>tbody>tr:first-child>td {
-    background-color: rgb(210, 229, 255);
+    background-color: rgb(192, 194, 255);
     font-size: 14px;
     font-weight: bold;
 }
@@ -137,12 +137,12 @@
     text-decoration: underline;
 }
 
-.extDevTable>tbody>tr:not(:first-child)>td:nth-child(n+6):nth-child(-n+9) {
+.extDevTable>tbody>tr:not(:first-child)>.isUsingExtDev {
     background-color: rgb(255, 201, 101);
 }
 
 .extDevTableTr:hover td {
-    background-color: rgba(229, 244, 255, 0.827) !important;
+    background-color: rgba(158, 208, 255, 0.827) !important;
 }
 
 .noDataInDB {
@@ -151,4 +151,21 @@
     text-align: center;
     /* background-color: aqua; */
     font-size: 18px;
+}
+
+.extDevTable>tbody>tr>.modifyButton button {
+    display: inline-block;
+    width: 50px;
+    height: 21px;
+    line-height: 21px;
+    background-color: rgb(127, 255, 127);
+    border: none;
+    border-radius: 5px;
+}
+
+.extDevTable>tbody>tr>.modifyButton button:hover {
+    background-color: #006a00;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
 }

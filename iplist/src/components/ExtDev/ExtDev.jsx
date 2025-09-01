@@ -15,6 +15,7 @@ function ExtDev() {
     const [addModalWindow, setAddModalWindow] = useState(false);
     const administratorId = sessionStorage.getItem('adminId');
 
+
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
     function handleEscKey(e) {
         if (e.key === 'Escape') {
@@ -64,9 +65,26 @@ function ExtDev() {
             })
     }
 
+    const fmatPurAndNote = (text) => {
+        if (!text) { return "-"; }  // text === null || text === undefined
+
+        if (text.length >= 20) {
+            const sliced = text.slice(0, 16);
+
+            return `${sliced}...`;
+        } else {
+            return text;
+        }
+    }
+
     const resetSearch = () => {
         setEnteredWord('');
         setSelectedOpt('');
+    }
+
+    const isNullHyphen = (data) => {
+        if (!data) { return `-`; }
+        else { return data }
     }
 
     // ==========================================================================================================================
@@ -115,30 +133,32 @@ function ExtDev() {
                             <td>변경</td>
                         </tr>
                         {extDevData && extDevData.length > 0 ?
-                            (extDevData.map((d, i) => (
-                                <tr key={i} className='extDevTableTr'>
-                                    <td>{d.dev_id}</td>
-                                    <td onClick={() => modifyAssets(d)}>{d.dev_type}</td>
-                                    <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
-                                    <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
-                                    <td>{d.dev_status}</td>
-                                    <td>{d.emp_id === null ? '-' : d.emp_id}</td>
-                                    <td>{d.emp_name}</td>
-                                    <td>{d.dept_name}</td>
-                                    <td>{d.location}</td>
-                                    <td>{d.valid_date}</td>
-                                    <td>{d.usage_purpose}</td>
-                                    <td>{d.cmd_model}</td>
-                                    <td>{d.cmd_serial_num}</td>
-                                    <td>{d.dlp_model}</td>
-                                    <td>{d.dlp_serial_num}</td>
-                                    <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
-                                    <td>{d.manufacturer}</td>
-                                    <td>{d.notes}</td>
-                                    <td><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
-                                </tr>
-
-                            )))
+                            (extDevData.map((d, i) => {
+                                const isUsing = [d.emp_id, d.emp_name, d.dept_id, d.dept_name, d.location].some(Boolean);
+                                return (
+                                    <tr key={i} className='extDevTableTr'>
+                                        <td>{d.dev_id}</td>
+                                        <td onClick={() => modifyAssets(d)}>{d.dev_type}</td>
+                                        <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
+                                        <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
+                                        <td>{d.dev_status}</td>
+                                        <td className={isUsing ? 'isUsingExtDev' : ''}>{isNullHyphen(d.emp_id)}</td>
+                                        <td className={isUsing ? 'isUsingExtDev' : ''}>{isNullHyphen(d.emp_name)}</td>
+                                        <td className={isUsing ? 'isUsingExtDev' : ''}>{isNullHyphen(d.dept_name)}</td>
+                                        <td className={isUsing ? 'isUsingExtDev' : ''}>{isNullHyphen(d.location)}</td>
+                                        <td>{isNullHyphen(d.valid_date)}</td>
+                                        <td title={d.usage_purpose}>{fmatPurAndNote(d.usage_purpose)}</td>
+                                        <td>{isNullHyphen(d.cmd_model)}</td>
+                                        <td>{isNullHyphen(d.cmd_serial_num)}</td>
+                                        <td>{isNullHyphen(d.dlp_model)}</td>
+                                        <td>{isNullHyphen(d.dlp_serial_num)}</td>
+                                        <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
+                                        <td>{isNullHyphen(d.manufacturer)}</td>
+                                        <td title={d.notes}>{fmatPurAndNote(d.notes)}</td>
+                                        <td className='modifyButton'><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
+                                    </tr>
+                                )
+                            }))
                             :
                             <td className='noDataInDB' colSpan={19}>데이터 없음</td>
                         }

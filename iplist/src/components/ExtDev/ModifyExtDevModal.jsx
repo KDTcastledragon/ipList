@@ -45,20 +45,47 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
     const [notes, setNotes] = useState(d.notes);
     const [devStatus, setDevStatus] = useState(d.dev_status);
 
+    const filterAlNum = /^[A-Za-z0-9]*$/;
+    const filterNum = /^[0-9]*$/;
+
     const [isModifying, setIsModifying] = useState(false);
     const [confirmModal, setConfirmModal] = useState(false);
 
+    console.log(`${d.registered_dlp} , ${d.controlled_dlp}`);
+
+    // ================================================================================
+    function validateValue(event, filter, setFunc, upper = false) {
+        let value = event.target.value;
+
+        if (upper) {
+            value = value.toUpperCase();
+        }
+
+        if (filter.test(value)) {
+            setFunc(value);
+        } else {
+            alert(`목록에 맞는 값을 입력해주세요.`);
+        }
+    }
 
 
     // =================[ 외부장치 정보 수정 함수 ]=========================================================================
     function modifyExtDev() {
+        const isUsing = [empId, empName, deptId, deptName, location].some(Boolean);
+
+        if (isUsing && devStatus !== '사용중') {
+            alert(`사용자 존재. [ 보관 ▶ 사용중 ] 변경합니다.`);
+            setDevStatus('사용중');
+            return;
+        }
+
 
         // =================[모든 데이터 전송. Refactoring 할 예정.]===============================
         const extDevData = {
             devId: devId,
             devType: devType,
-            registeredDlp: registeredDlp === 'true' ? 1 : 0,
-            controlledDlp: controlledDlp === 'true' ? 1 : 0,
+            registeredDlp: registeredDlp === 'true' || 1 ? 1 : 0,
+            controlledDlp: controlledDlp === 'true' || 1 ? 1 : 0,
             devStatus: devStatus,
             empId: empId,
             empName: empName,
@@ -71,7 +98,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
             cmdSerialNum: cmdSerialNum,
             dlpModel: dlpModel,
             dlpSerialNum: dlpSerialNum,
-            capacity: capacity,
+            capacity: capacity === '' ? null : capacity,
             manufacturer: manufacturer,
             notes: notes,
             adminId: administratorId
@@ -81,8 +108,8 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
         const modifiedData = {};
 
         if (devType !== d.dev_type) modifiedData.devType = devType;
-        if (registeredDlp !== d.registered_dlp) modifiedData.registeredDlp = registeredDlp === 'true' ? 1 : 0;
-        if (controlledDlp !== d.controlled_dlp) modifiedData.controlledDlp = controlledDlp === 'true' ? 1 : 0;
+        if (registeredDlp !== d.registered_dlp) modifiedData.registeredDlp = registeredDlp === 'true' || 1 ? 1 : 0;
+        if (controlledDlp !== d.controlled_dlp) modifiedData.controlledDlp = controlledDlp === 'true' || 1 ? 1 : 0;
         if (devStatus !== d.dev_status) modifiedData.devStatus = devStatus;
         if (empId !== d.emp_id) modifiedData.empId = empId;
         if (empName !== d.emp_name) modifiedData.empName = empName;
@@ -158,12 +185,15 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <span>DLP등록여부 : </span>
                             <select value={registeredDlp} onChange={(e) => {
                                 if (!isModifying) { return }
-                                else if (e.target.value === 'false' && controlledDlp === 'true') {
-                                    alert(`DLP통제여부 '미등록' 변경.`);
+
+                                const newData = e.target.value;
+
+                                if ((controlledDlp === 'true' || controlledDlp === 1) && newData === 'false') {
+                                    alert(`DLP통제여부 '미등록' 자동변경.`);
                                     setControlledDlp('false');
-                                } else {
-                                    setRegisteredDlp(e.target.value);
                                 }
+                                setRegisteredDlp(newData);
+
                             }}>
                                 <option value='true'>등록</option>
                                 <option value='false'>미등록</option>
@@ -173,7 +203,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <span>DLP통제여부 : </span>
                             <select value={controlledDlp} onChange={(e) => {
                                 if (!isModifying) { return }
-                                else if (registeredDlp === 'false' && e.target.value === 'true') {
+                                else if ((registeredDlp === 'false' || registeredDlp === 0) && e.target.value === 'true') {
                                     alert(`DLP등록 후 가능합니다.(현재 미등록 상태)`);
                                     return;
                                 } else {
@@ -187,7 +217,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                         </div>
                         <div>
                             <span>사번 : </span>
-                            <input type="text" value={empId} onChange={(e) => setEmpId(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={empId} onChange={(e) => validateValue(e, filterNum, setEmpId)} readOnly={!isModifying} />
                         </div>
                         <div>
                             <span>사용자 : </span>
@@ -228,19 +258,19 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                     <div className={`insertDataRight ${isModifying === true ? 'modDataRight' : ''}`}>
                         <div>
                             <span>모델(CMD) : </span>
-                            <input type="text" value={cmdModel} onChange={(e) => setCmdModel(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={cmdModel} onChange={(e) => validateValue(e, filterAlNum, setCmdModel)} readOnly={!isModifying} />
                         </div>
                         <div>
                             <span>시리얼(CMD) : </span>
-                            <input type="text" value={cmdSerialNum} onChange={(e) => setCmdSerialNum(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={cmdSerialNum} onChange={(e) => validateValue(e, filterAlNum, setCmdSerialNum)} readOnly={!isModifying} />
                         </div>
                         <div>
                             <span>모델(DLP) : </span>
-                            <input type="text" value={dlpModel} onChange={(e) => setDlpModel(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={dlpModel} onChange={(e) => validateValue(e, filterAlNum, setDlpModel)} readOnly={!isModifying} />
                         </div>
                         <div>
-                            <span>시리얼(CMD) : </span>
-                            <input type="text" value={dlpSerialNum} onChange={(e) => setDlpSerialNum(e.target.value)} readOnly={!isModifying} />
+                            <span>시리얼(DLP) : </span>
+                            <input type="text" value={dlpSerialNum} onChange={(e) => validateValue(e, filterAlNum, setDlpSerialNum)} readOnly={!isModifying} />
                         </div>
                         <div>
                             <span>허용만료일 : </span>
@@ -248,7 +278,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                         </div>
                         <div>
                             <span>용량 : </span>
-                            <input type="text" value={capacity} onChange={(e) => setCapacity(e.target.value)} readOnly={!isModifying} />
+                            <input type="text" value={capacity} onChange={(e) => validateValue(e, filterNum, setCapacity)} readOnly={!isModifying} />
                         </div>
                         <div>
                             <span>제조사 : </span>
