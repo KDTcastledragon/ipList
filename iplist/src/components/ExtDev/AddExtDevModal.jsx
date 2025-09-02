@@ -55,9 +55,9 @@ function AddExtDevModal({ setAddModalWindow }) {
 
         if (filter.test(value)) {
             setFunc(value);
+
         } else {
             alert(`목록에 맞는 값을 입력해주세요.`);
-            setFunc(null);
             return;
         }
     }
@@ -80,8 +80,8 @@ function AddExtDevModal({ setAddModalWindow }) {
         const extDevData = {
             devId: devId,
             devType: devType,
-            registeredDlp: registeredDlp === 'true' || 1 ? 1 : 0,
-            controlledDlp: controlledDlp === 'true' || 1 ? 1 : 0,
+            registeredDlp: registeredDlp === 'true' ? 1 : 0,
+            controlledDlp: controlledDlp === 'true' ? 1 : 0,
             devStatus: devStatus,
             empId: empId,
             empName: empName,

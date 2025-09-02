@@ -107,6 +107,10 @@ function ExtDev() {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <button className='addExtDevButton' onClick={() => setAddModalWindow(true)}>신규장비 등록</button>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => searchExtDev('ONLY_DISCARDED_EXT_DEV_SEARCH')}>폐기장비 검색</button>
             </div>
             <div className='extDevTableSection'>
                 <table className='extDevTable'>

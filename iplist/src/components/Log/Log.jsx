@@ -10,6 +10,7 @@ function Log() {
     const [logData, setLogData] = useState([]);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [isAllPeriod, setIsAllPeriod] = useState(false);
 
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
     function handleEscKey(e) {
@@ -79,8 +80,8 @@ function Log() {
     // ==========================================================================
     function selectLogs() {
         const data = {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate === '' ? null : startDate,
+            endDate: endDate === '' ? null : endDate,
             selectedOpt: selectedOpt,
             logWord: enteredWord
         }
@@ -101,15 +102,22 @@ function Log() {
         setEnteredWord('');
     }
 
+    const handlePeriod = () => {
+        setIsAllPeriod(!isAllPeriod);
+        setStartDate(null);
+        setEndDate(null);
+    }
+
     //=============================================================================================================
     return (
         <div className='ExtDevLogContainer'>
-            <div className='searchAddBox'>
-                <input type="date" value={startDate} onChange={(e) =>
-                    setStartDate(e.target.value)}
-                />
+            <div className='searchLogBox'>
+                <button onClick={() => handlePeriod()} className={`isAllPeriod ${isAllPeriod ? 'trueAllPd' : ''}`}>전체기간</button>
+                {/* <span className={isAllPeriod ? 'trueAllPd' : 'falseAllPd'}>전체기간</span> */}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} disabled={isAllPeriod} />
                 &nbsp;&nbsp;&nbsp;&nbsp;<span>~</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} disabled={isAllPeriod} />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <select value={selectedOpt} onChange={(e) => setSelectedOpt(e.target.value)}>

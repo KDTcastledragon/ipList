@@ -72,6 +72,7 @@ public class ExtDevServiceImpl implements ExtDevService {
 	@Override
 	public List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord) {
 		List<ExtDevLogHistDTO> list = extmapper.filteredLogs(startDate, endDate, selectedOpt, logWord);
+		log.info("filtered Log :" + list);
 		return list;
 	}
 

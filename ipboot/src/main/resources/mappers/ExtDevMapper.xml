@@ -7,7 +7,7 @@
 <mapper namespace="com.iplist.ipboot.mapper.ExtDevMapper">
 	<select id="allExtDevs"
 		resultType="com.iplist.ipboot.domain.ExtDevDTO">
-		select * from ext_dev;
+		select * from ext_dev where dev_status !='폐기';
 	</select>
 	
 	<select id="searchExtDev" resultType="com.iplist.ipboot.domain.ExtDevDTO">

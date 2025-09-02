@@ -110,6 +110,16 @@
     margin-right: 8px;
 }
 
+.insertDataRight>div:nth-child(n+1):nth-child(-n+4)>input {
+    display: inline-block;
+    width: 290px;
+}
+
+.insertDataRight>div:nth-child(7)>input {
+    display: inline-block;
+    width: 200px;
+}
+
 .insertDataLeft>div>textarea {
     width: 180px;
     height: 80px;
