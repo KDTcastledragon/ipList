@@ -99,7 +99,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
     function modifyExtDev() {
         const isUsing = [empId, empName, deptId, deptName, location].some(Boolean);
 
-        if (isUsing && devStatus !== '사용중') {
+        if (isUsing && devStatus === '보관') {
             alert(`사용자 존재. [ 보관 ▶ 사용중 ] 변경합니다.`);
             setDevStatus('사용중');
             return;
@@ -197,6 +197,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <select value={devType} onChange={(e) => {
                                 if (!isModifying) { return }
                                 setDevType(e.target.value);
+
                             }}>
                                 <option value="USB">USB</option>
                                 <option value="카드리더기">카드리더기</option>
@@ -263,6 +264,11 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                                 if (e.target.value === '폐기') {
                                     alert(`폐기 처리합니다. 주의하세요.`);
                                     setDevStatus(e.target.value);
+                                    // setEmpId('');
+                                    // setEmpName('');
+                                    // setDeptId('');
+                                    // setDeptName('');
+                                    // setLocation('');
                                 } else {
                                     setDevStatus(e.target.value);
                                 }

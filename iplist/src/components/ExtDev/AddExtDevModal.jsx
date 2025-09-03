@@ -44,6 +44,7 @@ function AddExtDevModal({ setAddModalWindow }) {
     const administratorId = sessionStorage.getItem('adminId');
 
     const filterAlNum = /^[A-Za-z0-9]*$/;
+    const filterAlNumS = /^[A-Za-z0-9_.\- ]*$/;
     const filterNum = /^[0-9]*$/;
     // ==============================================================================================
     function validateValue(event, filter, setFunc, upper = false) {
@@ -196,7 +197,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                     <div className='insertDataRight'>
                         <div>
                             <span>모델(CMD) : </span>
-                            <input type="text" value={cmdModel} onChange={(e) => validateValue(e, filterAlNum, setCmdModel)} />
+                            <input type="text" value={cmdModel} onChange={(e) => validateValue(e, filterAlNumS, setCmdModel)} />
                         </div>
                         <div>
                             <span>시리얼(CMD) : </span>
@@ -204,7 +205,7 @@ function AddExtDevModal({ setAddModalWindow }) {
                         </div>
                         <div>
                             <span>모델(DLP) : </span>
-                            <input type="text" value={dlpModel} onChange={(e) => validateValue(e, filterAlNum, setDlpModel)} />
+                            <input type="text" value={dlpModel} onChange={(e) => validateValue(e, filterAlNumS, setDlpModel)} />
                         </div>
                         <div>
                             <span>시리얼(DLP) : </span>
