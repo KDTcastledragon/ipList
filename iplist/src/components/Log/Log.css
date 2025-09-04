@@ -12,13 +12,17 @@
     border-collapse: collapse;
     padding: 0;
     font-size: 11px;
+    /* height: calc(100vh - 570px); */
+    /* 여기에 vh 적용하면 안됨.*/
 }
 
 
 .extDevLogTableSection {
-    max-height: 420px;
+    height: calc(100vh - 333px);
     overflow-x: scroll;
     overflow-y: scroll;
+    /* max-height: 700px; */
+    /* background-color: #4a90e2; */
 }
 
 .extDevLogTable th,
@@ -30,6 +34,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 15px;
+    line-height: 15px;
 }
 
 .extDevLogTable>tbody>tr:first-child>td {
@@ -39,10 +45,10 @@
 }
 
 
-.extDevLogTable>tbody>tr>td {
+/* .extDevLogTable>tbody>tr>td {
     height: 20px;
     line-height: 20px;
-}
+} */
 
 .extDevLogTableTr:hover td {
     background-color: rgba(222, 255, 182, 0.751);
@@ -149,7 +155,7 @@
 
 .isAllPeriod:hover {
     cursor: pointer;
-    background-color: #4a90e2;
+    background-color: #0c8f00;
     font-weight: bold;
     color: white;
     opacity: 1.0;
@@ -157,7 +163,7 @@
 
 
 .isAllPeriod.trueAllPd {
-    background-color: #4a90e2;
+    background-color: #0c8f00;
     font-weight: bold;
     color: white;
     opacity: 1.0;
