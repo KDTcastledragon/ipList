@@ -13,7 +13,8 @@
 	<select id="searchExtDev" resultType="com.iplist.ipboot.domain.ExtDevDTO">
 	call search_ext_dev(
 	#{word , jdbcType=VARCHAR, mode=IN},
-	#{devType, jdbcType=VARCHAR, mode=IN}
+	#{devType, jdbcType=VARCHAR, mode=IN},
+	#{devStatus, jdbcType=VARCHAR, mode=IN}
 	);
 	</select>
 
@@ -81,6 +82,7 @@
 		#{startDate, jdbcType=TIMESTAMP, mode=IN},
 		 #{endDate, jdbcType=TIMESTAMP, mode=IN},
 		  #{selectedOpt, jdbcType=VARCHAR, mode=IN},
+		  
 		   #{logWord, jdbcType=VARCHAR, mode=IN}
 		);
 	</select>

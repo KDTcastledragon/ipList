@@ -15,6 +15,7 @@ function LogIn() {
     // =====[로그인]======================================================
     function loginButton() {
         const data = { admin_id: id, admin_pw: pw }
+        console.log(`${id} & ${pw}`)
 
         if (!id) {
             alert(`아이디를 입력해주세요.`);

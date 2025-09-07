@@ -8,11 +8,14 @@ import { useEffect, useState } from 'react';
 
 function ExtDev() {
     const [enteredWord, setEnteredWord] = useState('');
-    const [selectedOpt, setSelectedOpt] = useState('');
+    const [selectedOpt_type, setSelectedOpt_type] = useState('');
+    const [selectedOpt_status, setSelectedOpt_status] = useState('managed');
     const [extDevData, setExtDevData] = useState([]);
     const [selectedAssetsData, setSelectedAssetsData] = useState(null);
     const [modifyWindow, setModifyWindow] = useState(false);
     const [addModalWindow, setAddModalWindow] = useState(false);
+    const [isClickedDevRow, setIsClickedDevRow] = useState(null);
+
     const administratorId = sessionStorage.getItem('adminId');
 
 
@@ -54,7 +57,8 @@ function ExtDev() {
     function searchExtDev() {
         const data = {
             word: enteredWord,
-            devType: selectedOpt
+            devType: selectedOpt_type,
+            devStatus: selectedOpt_status
         }
         axios
             .post(`/extDev/searchExtDev`, data)
@@ -79,7 +83,8 @@ function ExtDev() {
 
     const resetSearch = () => {
         setEnteredWord('');
-        setSelectedOpt('');
+        setSelectedOpt_type('');
+        setSelectedOpt_status('managed');
     }
 
     const isNullHyphen = (data) => {
@@ -87,15 +92,36 @@ function ExtDev() {
         else { return data }
     }
 
+    // const clickedDevRow = (i) => {
+    //     setIsClickedDevRow(i);
+    // }
+
+    const clickedDevRow = (i) => {
+        if (isClickedDevRow === i) {
+            setIsClickedDevRow(null);
+        } else {
+            setIsClickedDevRow(i);
+        }
+    }
+
+
+
     // ==========================================================================================================================
     return (
         <div className='ExtDevContainer'>
             <div className='searchAddBox'>
-                <select value={selectedOpt} onChange={(e) => { setSelectedOpt(e.target.value); }}>
-                    <option value="">전체</option>
+                <select value={selectedOpt_type} onChange={(e) => { setSelectedOpt_type(e.target.value); }} className='devOptType'>
+                    <option value="">장비종류(전체)</option>
                     <option value="USB">USB</option>
                     <option value="카드리더기">카드리더기</option>
                     <option value="외장하드">외장하드</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select value={selectedOpt_status} onChange={(e) => { setSelectedOpt_status(e.target.value); }} className='devOptStatus'>
+                    <option value="managed">사용구분(관리중)</option>
+                    <option value="사용중">사용중</option>
+                    <option value="보관">보관</option>
+                    <option value="폐기">폐기</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" onChange={(e) => setEnteredWord(e.target.value)} value={enteredWord} />
@@ -108,9 +134,9 @@ function ExtDev() {
 
                 <button className='addExtDevButton' onClick={() => setAddModalWindow(true)}>신규장비 등록</button>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button onClick={() => searchExtDev('ONLY_DISCARDED_EXT_DEV_SEARCH')}>폐기장비 검색</button>
+                {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+                {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+                {/* <button onClick={() => searchExtDev('ONLY_DISCARDED_EXT_DEV_SEARCH')}>폐기장비 검색</button> */}
             </div>
             <div className='extDevTableSection'>
                 <table className='extDevTable'>
@@ -134,15 +160,20 @@ function ExtDev() {
                             <td>용량</td>
                             <td>제조사</td>
                             <td>비고</td>
-                            <td>변경</td>
+                            <td>상세</td>
                         </tr>
                         {extDevData && extDevData.length > 0 ?
                             (extDevData.map((d, i) => {
                                 const isUsing = [d.emp_id, d.emp_name, d.dept_id, d.dept_name, d.location].some(Boolean);
                                 return (
-                                    <tr key={i} className='extDevTableTr'>
+                                    <tr key={i} className={`extDevTableTr ${isClickedDevRow === i ? 'clickedDevRow' : ''}`} onClick={() => clickedDevRow(i)}>
                                         <td>{d.dev_id}</td>
-                                        <td onClick={() => modifyAssets(d)}>{d.dev_type}</td>
+                                        <td onClick={() => {
+                                            modifyAssets(d)
+                                            setIsClickedDevRow(i)
+                                        }
+
+                                        }>{d.dev_type}</td>
                                         <td>{d.registered_dlp === true ? 'O' : 'X'}</td>
                                         <td>{d.controlled_dlp === true ? 'O' : 'X'}</td>
                                         <td>{d.dev_status}</td>
@@ -159,7 +190,7 @@ function ExtDev() {
                                         <td>{d.capacity === null ? '-' : d.capacity > 512 ? `${Math.floor(d.capacity / 1024)}TB` : `${Math.floor(d.capacity)}GB`}</td>
                                         <td>{isNullHyphen(d.manufacturer)}</td>
                                         <td title={d.notes}>{fmatPurAndNote(d.notes)}</td>
-                                        <td className='modifyButton'><div><button onClick={() => modifyAssets(d)}>변경</button></div></td>
+                                        <td className='modifyButton'><div><button onClick={() => modifyAssets(d)}>상세</button></div></td>
                                     </tr>
                                 )
                             }))

@@ -1,6 +1,6 @@
 /* =======================[검색추가박스]======================================================= */
 .searchAddBox {
-    width: 1000px;
+    width: 1100px;
     height: 30px;
     margin: 30px auto;
     margin-top: 30px;
@@ -41,9 +41,20 @@
 }
 
 
-.searchAddBox>select:nth-of-type(1) {
+.searchAddBox>.devOptType {
     display: inline-block;
-    width: 110px;
+    width: 120px;
+    height: 30px;
+    background-color: rgb(212, 212, 212);
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.searchAddBox>.devOptStatus {
+    display: inline-block;
+    width: 125px;
     height: 30px;
     background-color: rgb(212, 212, 212);
     text-align: center;
@@ -94,11 +105,12 @@
 .extDevTableSection {
     overflow-x: auto;
     overflow-y: scroll;
+    height: calc(100vh - 333px);
 }
 
 .extDevTable {
     /* height: 455px; */
-    margin-left: 20px;
+    margin-left: 10px;
     border: 1px solid black;
     text-align: center;
     border-collapse: collapse;
@@ -137,12 +149,20 @@
     text-decoration: underline;
 }
 
-.extDevTable>tbody>tr:not(:first-child)>.isUsingExtDev {
+/* .extDevTable>tbody>tr:not(:first-child)>.isUsingExtDev {
+    background-color: rgb(255, 201, 101);
+} */
+
+.isUsingExtDev {
     background-color: rgb(255, 201, 101);
 }
 
 .extDevTableTr:hover td {
-    background-color: rgba(158, 208, 255, 0.827) !important;
+    background-color: rgba(210, 233, 255, 0.827);
+}
+
+tbody>.clickedDevRow td {
+    background-color: rgba(188, 222, 255, 0.827);
 }
 
 .noDataInDB {

@@ -77,8 +77,8 @@ public class ExtDevServiceImpl implements ExtDevService {
 	}
 
 	@Override
-	public List<ExtDevDTO> searchExtDev(String word, String devType) {
-		List<ExtDevDTO> list = extmapper.searchExtDev(word, devType);
+	public List<ExtDevDTO> searchExtDev(String word, String devType, String devStatus) {
+		List<ExtDevDTO> list = extmapper.searchExtDev(word, devType, devStatus);
 		return list;
 	}
 

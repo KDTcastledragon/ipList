@@ -6,11 +6,14 @@ import axios from 'axios';
 
 function Log() {
     const [enteredWord, setEnteredWord] = useState('');
-    const [selectedOpt, setSelectedOpt] = useState('');
+    const [selectedOpt_type, setSelectedOpt_type] = useState('');
+    const [selectedOpt_status, setSelectedOpt_status] = useState('');
     const [logData, setLogData] = useState([]);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [isAllPeriod, setIsAllPeriod] = useState(false);
+    const [isClickedRow, setIsClickedRow] = useState(null);
+
 
     //==[1. esc 입력시, Modal 닫힘 설정 함수] =======================================================================================
     function handleEscKey(e) {
@@ -82,7 +85,8 @@ function Log() {
         const data = {
             startDate: startDate === '' ? null : startDate,
             endDate: endDate === '' ? null : endDate,
-            selectedOpt: selectedOpt,
+            selectedOptType: selectedOpt_type,
+            selectedOptStatus: selectedOpt_status,
             logWord: enteredWord
         }
 
@@ -98,7 +102,8 @@ function Log() {
     const resetSearch = () => {
         setStartDate('');
         setEndDate('');
-        setSelectedOpt('');
+        setSelectedOpt_type('');
+        setSelectedOpt_status('');
         setEnteredWord('');
     }
 
@@ -107,6 +112,18 @@ function Log() {
         setStartDate(null);
         setEndDate(null);
     }
+
+    const clickedLogRow = (i) => {
+        setIsClickedRow(i);
+    }
+    // const clickedLogRow = (i) => {
+    //     if (isClickedRow === i) {
+    //         setIsClickedRow(null);
+    //     } else {
+    //         setIsClickedRow(i);
+    //     }
+    // }
+
 
     //=============================================================================================================
     return (
@@ -120,11 +137,18 @@ function Log() {
                 <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} disabled={isAllPeriod} />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select value={selectedOpt} onChange={(e) => setSelectedOpt(e.target.value)}>
-                    <option value="">전체</option>
+                <select value={selectedOpt_type} onChange={(e) => setSelectedOpt_type(e.target.value)} className='logOptType'>
+                    <option value="">장비종류(전체)</option>
                     <option value="USB">USB</option>
                     <option value="카드리더기">카드리더기</option>
                     <option value="외장하드">외장하드</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select value={selectedOpt_status} onChange={(e) => setSelectedOpt_status(e.target.value)} className='logOptStatus'>
+                    <option value="">사용구분(전체)</option>
+                    <option value="사용중">사용중</option>
+                    <option value="보관">보관</option>
+                    <option value="폐기">폐기</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -162,7 +186,7 @@ function Log() {
                         </tr>
                         {logData && logData.length > 0 ?
                             (logData.map((d, i) => (
-                                <tr key={i} className='extDevLogTableTr'>
+                                <tr key={i} className={`extDevLogTableTr ${isClickedRow === i ? 'isClikcedLogRow' : ''}`} onClick={() => clickedLogRow(i)}>
                                     <td>{d.log_type}</td>
                                     <td>{d.dev_id}</td>
                                     <td>{d.dev_type}</td>
@@ -188,7 +212,7 @@ function Log() {
                                     {/* <td>
                                     {fmatPurAndNote(d.notes)}
                                     </td> */}
-                                    <td>{d.admin_id}</td>
+                                    < td > {d.admin_id}</td>
                                     <td>{d.log_timestamp === null ? '-' : fmatTs(d.log_timestamp)}</td>
                                 </tr>
 
@@ -198,8 +222,8 @@ function Log() {
                         }
                     </tbody>
                 </table>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

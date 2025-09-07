@@ -112,20 +112,20 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
             registeredDlp: registeredDlp === 'true' ? 1 : 0,
             controlledDlp: controlledDlp === 'true' ? 1 : 0,
             devStatus: devStatus,
-            empId: empId,
-            empName: empName,
-            deptId: deptId,
-            deptName: deptName,
-            location: location,
-            validDate: validDate,
-            usagePurpose: usagePurpose,
+            empId: empId === '' ? null : empId,
+            empName: empName === '' ? null : empName,
+            deptId: deptId === '' ? null : deptId,
+            deptName: deptName === '' ? null : deptName,
+            location: location === '' ? null : location,
+            validDate: validDate === '' ? null : validDate,
+            usagePurpose: usagePurpose === '' ? null : usagePurpose,
             cmdModel: cmdModel,
             cmdSerialNum: cmdSerialNum,
             dlpModel: dlpModel,
             dlpSerialNum: dlpSerialNum,
             capacity: capacity === '' ? null : capacity,
             manufacturer: manufacturer,
-            notes: notes,
+            notes: notes === '' ? null : notes,
             adminId: administratorId
         }
 
@@ -170,6 +170,15 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
             .catch((e) => {
                 alert(`등록 실패: ${e.message}`);
             });
+    }
+
+    const handleModify = (sta) => {
+        if (sta === '폐기') {
+            alert(`폐기장비는 수정 불가합니다.`);
+            return;
+        } else {
+            setIsModifying(true);
+        }
     }
 
     return (
@@ -259,17 +268,28 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                             <span>사용상태 : </span>
                             <select value={devStatus} disabled={!isModifying} onChange={(e) => {
                                 if (!isModifying) {
-                                    return
-                                };
+                                    return;
+                                }
+
                                 if (e.target.value === '폐기') {
                                     alert(`폐기 처리합니다. 주의하세요.`);
                                     setDevStatus(e.target.value);
-                                    // setEmpId('');
-                                    // setEmpName('');
-                                    // setDeptId('');
-                                    // setDeptName('');
-                                    // setLocation('');
-                                } else {
+                                }
+
+                                else if (e.target.value === '보관') {
+                                    alert(`사용자 정보 초기화`);
+                                    setEmpId('');
+                                    setEmpName('');
+                                    setDeptId('');
+                                    setDeptName('');
+                                    setLocation('');
+                                    setUsagePurpose('');
+                                    setNotes('');
+                                    setValidDate('');
+                                    setDevStatus(e.target.value);
+                                }
+
+                                else {
                                     setDevStatus(e.target.value);
                                 }
                             }}>
@@ -324,7 +344,7 @@ function ModifyExtDevModal({ d, setModifyWindow }) {
                 <div className='modalExtDevButton'>
                     {isModifying === false ?
                         <div className='isModifyingFalse'>
-                            <button onClick={() => setIsModifying(true)}>수정하기</button>
+                            <button onClick={() => handleModify(d.dev_status)}>수정하기</button>
                             <button onClick={() => setModifyWindow(false)}>닫기</button>
                         </div>
                         :

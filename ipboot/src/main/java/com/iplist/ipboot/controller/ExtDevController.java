@@ -50,8 +50,9 @@ public class ExtDevController {
 			log.info("검색어 확인 : " + data);
 			String word = (String) data.get("word");
 			String devType = (String) data.get("devType");
+			String devStatus = (String) data.get("devStatus");
 
-			List<ExtDevDTO> searchedList = extservice.searchExtDev(word, devType);
+			List<ExtDevDTO> searchedList = extservice.searchExtDev(word, devType, devStatus);
 			log.info("");
 
 			return ResponseEntity.ok().body(searchedList);
