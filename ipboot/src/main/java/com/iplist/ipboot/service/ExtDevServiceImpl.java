@@ -70,15 +70,15 @@ public class ExtDevServiceImpl implements ExtDevService {
 	}
 
 	@Override
-	public List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOpt, String logWord) {
-		List<ExtDevLogHistDTO> list = extmapper.filteredLogs(startDate, endDate, selectedOpt, logWord);
-		log.info("filtered Log :" + list);
+	public List<ExtDevDTO> searchExtDev(String word, String devType, String devStatus) {
+		List<ExtDevDTO> list = extmapper.searchExtDev(word, devType, devStatus);
 		return list;
 	}
 
 	@Override
-	public List<ExtDevDTO> searchExtDev(String word, String devType, String devStatus) {
-		List<ExtDevDTO> list = extmapper.searchExtDev(word, devType, devStatus);
+	public List<ExtDevLogHistDTO> filteredLogs(LocalDate startDate, LocalDate endDate, String selectedOptType, String selectedOptStatus, String logWord) {
+		List<ExtDevLogHistDTO> list = extmapper.filteredLogs(startDate, endDate, selectedOptType,selectedOptStatus, logWord);
+		log.info("filtered Log :" + list);
 		return list;
 	}
 

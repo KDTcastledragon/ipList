@@ -81,8 +81,8 @@
 		call filter_ext_dev_log(
 		#{startDate, jdbcType=TIMESTAMP, mode=IN},
 		 #{endDate, jdbcType=TIMESTAMP, mode=IN},
-		  #{selectedOpt, jdbcType=VARCHAR, mode=IN},
-		  
+		 #{selectedOptType, jdbcType=VARCHAR, mode=IN},
+		  #{selectedOptStatus, jdbcType=VARCHAR, mode=IN},
 		   #{logWord, jdbcType=VARCHAR, mode=IN}
 		);
 	</select>

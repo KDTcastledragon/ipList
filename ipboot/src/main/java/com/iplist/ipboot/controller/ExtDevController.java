@@ -106,16 +106,17 @@ public class ExtDevController {
 			LocalDate startDate = startDateStr != null ? LocalDate.parse(startDateStr, formatter) : null;
 			LocalDate endDate = endDateStr != null ? LocalDate.parse(endDateStr, formatter) : null;
 
-			String selectedOpt = (String) data.get("selectedOpt");
+			String selectedOptType = (String) data.get("selectedOptType");
+			String selectedOptStatus = (String) data.get("selectedOptStatus");
 			String logWord = (String) data.get("logWord");
 
-			if (logWord == null && startDate == null && endDate == null && selectedOpt == null) {
+			if (logWord == null && startDate == null && endDate == null && selectedOptType == null && selectedOptStatus == null) {
 				List<ExtDevLogHistDTO> logList = extservice.allLogs();
 				log.info("logList : " + logList);
 				return ResponseEntity.ok(logList);
 
 			} else {
-				List<ExtDevLogHistDTO> logList = extservice.filteredLogs(startDate, endDate, selectedOpt, logWord);
+				List<ExtDevLogHistDTO> logList = extservice.filteredLogs(startDate, endDate, selectedOptType, selectedOptStatus, logWord);
 				return ResponseEntity.ok(logList);
 
 			}

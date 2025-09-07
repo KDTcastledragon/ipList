@@ -92,17 +92,17 @@ function ExtDev() {
         else { return data }
     }
 
-    // const clickedDevRow = (i) => {
-    //     setIsClickedDevRow(i);
-    // }
-
     const clickedDevRow = (i) => {
-        if (isClickedDevRow === i) {
-            setIsClickedDevRow(null);
-        } else {
-            setIsClickedDevRow(i);
-        }
+        setIsClickedDevRow(i);
     }
+
+    // const clickedDevRow = (i) => {
+    //     if (isClickedDevRow === i) {
+    //         setIsClickedDevRow(null);
+    //     } else {
+    //         setIsClickedDevRow(i);
+    //     }
+    // }
 
 
 
@@ -170,7 +170,7 @@ function ExtDev() {
                                         <td>{d.dev_id}</td>
                                         <td onClick={() => {
                                             modifyAssets(d)
-                                            setIsClickedDevRow(i)
+                                            // setIsClickedDevRow(i)
                                         }
 
                                         }>{d.dev_type}</td>
