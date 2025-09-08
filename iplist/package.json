@@ -1,7 +1,8 @@
 {
   "name": "iplist",
   "version": "0.1.0",
-  "homepage": "/",
+  "main": "electron.js",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
@@ -21,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:win64": "electron-builder --windows nsis:x64",
+    "start:electron": "concurrently 'npm run start:dev' 'wait-on http://localhost:3000 && electron .'"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +43,55 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^36.2.0",
+    "electron-builder": "^26.0.12",
+    "electron-is-dev": "^3.0.1",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "extends": null,
+    "productName": "iplist",
+    "appId": "com.iplist.electron",
+    "asar": true,
+    "files": [
+      "electron.js",
+      "build/**/*",
+      "build/favicon.png"
+    ],
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "build/icons/icon.icns"
+    },
+    "dmg": {
+      "title": "iplist",
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "perMachine": true,
+      "language": 1042,
+      "installerIcon": "build/icons/icon.ico",
+      "shortcutName": "iplist",
+      "artifactName": "iplist-${version}.${ext}",
+      "uninstallDisplayName": "iplist"
+    },
+    "directories": {
+      "buildResources": "./build/",
+      "output": "./dist/",
+      "app": "."
+    }
   },
   "proxy": "http://43.200.58.71:8080"
 }
