@@ -93,5 +93,5 @@
       "app": "."
     }
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://43.200.58.71:8080"
 }

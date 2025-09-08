@@ -158,11 +158,11 @@
 }
 
 .extDevTableTr:hover td {
-    background-color: rgba(210, 233, 255, 0.827);
+    background-color: rgba(130, 195, 255, 0.827);
 }
 
 tbody>.clickedDevRow td {
-    background-color: rgba(188, 222, 255, 0.827);
+    background-color: rgba(130, 195, 255, 0.827);
 }
 
 .noDataInDB {
